@@ -22,7 +22,6 @@ class _DashboardPageState extends State<DashboardPage> {
       toolBar: [
         TextButton(
           style: ButtonStyle(
-            fixedSize: MaterialStateProperty.all(const Size(550, 40)),
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18.0),
@@ -42,7 +41,6 @@ class _DashboardPageState extends State<DashboardPage> {
         ),
         TextButton(
           style: ButtonStyle(
-            fixedSize: MaterialStateProperty.all(const Size(550, 40)),
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18.0),
@@ -67,7 +65,6 @@ class _DashboardPageState extends State<DashboardPage> {
         ),
         TextButton(
           style: ButtonStyle(
-            fixedSize: MaterialStateProperty.all(const Size(550, 40)),
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18.0),
@@ -92,7 +89,6 @@ class _DashboardPageState extends State<DashboardPage> {
         ),
         TextButton(
           style: ButtonStyle(
-            fixedSize: MaterialStateProperty.all(const Size(550, 40)),
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18.0),
@@ -118,10 +114,10 @@ class _DashboardPageState extends State<DashboardPage> {
           ),
         )
       ],
+      secondToolBarAlignment: MainAxisAlignment.spaceEvenly,
       secondToolBar: [
         TextButton(
           style: ButtonStyle(
-            fixedSize: MaterialStateProperty.all(const Size(550, 40)),
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18.0),
@@ -142,7 +138,6 @@ class _DashboardPageState extends State<DashboardPage> {
         ),
         TextButton(
           style: ButtonStyle(
-            fixedSize: MaterialStateProperty.all(const Size(550, 40)),
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18.0),

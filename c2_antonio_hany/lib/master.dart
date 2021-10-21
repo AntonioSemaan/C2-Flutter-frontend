@@ -37,30 +37,34 @@ class _MasterState extends State<Master> {
                 child: Container(
               height: 140,
               color: const Color.fromRGBO(0, 133, 254, 1.0),
-              child: Row(
-                  mainAxisAlignment: widget.toolBarAlignment!,
-                  children: widget.toolBar!),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                    mainAxisAlignment: widget.toolBarAlignment!,
+                    children: widget.toolBar!),
+              ),
             ))
           ],
         ),
         Container(
-            child: widget.secondToolBar == null
+            child: widget.secondToolBar!.isEmpty
                 ? null
                 : Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Center(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Center(
                       child: Container(
+                        height: 60,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
+                          color: const Color.fromRGBO(0, 133, 254, 1.0),
                         ),
-                        color: const Color.fromRGBO(0, 133, 254, 1.0),
                         child: Row(
                           mainAxisAlignment: widget.secondToolBarAlignment!,
                           children: widget.secondToolBar!,
                         ),
                       ),
                     ),
-                )),
+                  )),
         Expanded(child: widget.content),
       ],
     );
