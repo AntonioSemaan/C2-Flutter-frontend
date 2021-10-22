@@ -1,6 +1,7 @@
-import 'package:c2_antonio_hany/data_classes/logged_user.dart';
+import 'package:c2_antonio_hany/data_classes/user.dart';
 import 'package:c2_antonio_hany/globals.dart';
 import 'package:c2_antonio_hany/managers/main_api_repo.dart';
+import 'package:c2_antonio_hany/pages/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -96,7 +97,7 @@ class _SignUpFormFragmentState extends State<SignUpFormFragment> {
         validator: (value) {
           if (value!.length < 3) {
             return "Enter at least 3 characters";
-          } else if (_password == _confirmPassword) {
+          } else if (_password != _confirmPassword) {
             return "Your passwrods do not match";
           } else {
             return null;
@@ -198,10 +199,8 @@ class _SignUpFormFragmentState extends State<SignUpFormFragment> {
             foregroundColor: MaterialStateProperty.all(Colors.white),
             backgroundColor: MaterialStateProperty.all(
                 const Color.fromRGBO(0, 133, 254, 1.0)),
-            textStyle: MaterialStateProperty.all(const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: Colors.white)),
+            textStyle: MaterialStateProperty.all(
+                Theme.of(context).textTheme.headline4),
           ),
           onPressed: () {
             if (formKey.currentState!.validate()) {
@@ -214,15 +213,24 @@ class _SignUpFormFragmentState extends State<SignUpFormFragment> {
   }
 
   Future callSignUpApi() async {
-    LoggedUser? user = await MainApiRepo.userApiRepo
+    Map<String, dynamic>? responseData = await MainApiRepo.userApiRepo
         .signUp(_username, _password, _email, _firstName, _lastName, _title);
 
-    if (user == null) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text("Something went wrong, please try again")));
+    if (responseData == null || responseData.containsKey("errorMessage")) {
+      String string = "Something went wrong, please try again";
+      if (responseData != null) {
+        string = responseData["errorMessage"];
+      }
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(backgroundColor: Colors.red, content: Text(string)));
+    } else if (!responseData["success"]) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          backgroundColor: Colors.red, content: Text(responseData["message"])));
     } else {
-      gLoggedUser = user;
-      //TODO: navigate to dashboard
+      gLoggedUser = User.fromJson(responseData["data"]);
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => ProfilePage()),
+          (route) => false);
     }
   }
 }

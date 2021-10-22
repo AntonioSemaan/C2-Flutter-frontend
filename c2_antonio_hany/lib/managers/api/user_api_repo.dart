@@ -1,4 +1,4 @@
-import 'package:c2_antonio_hany/data_classes/logged_user.dart';
+import 'package:c2_antonio_hany/data_classes/user.dart';
 import 'package:c2_antonio_hany/managers/api_Interfaces/i_user_api_repo.dart';
 import 'package:c2_antonio_hany/managers/api_manager.dart';
 import 'package:flutter/widgets.dart';
@@ -10,8 +10,8 @@ class UserApiRepo implements IUserApiRepo {
   final APIManager _apiManager = APIManager();
 
   @override
-  Future<LoggedUser?> signUp(String username, String password, String email,
-      String firstName, String lastName, String title) async {
+  Future<Map<String, dynamic>?> signUp(String username, String password,
+      String email, String firstName, String lastName, String title) async {
     Map<String, String> params = {
       "username": username,
       "password": password,
@@ -20,24 +20,27 @@ class UserApiRepo implements IUserApiRepo {
       "lastName": lastName,
       "title": title,
     };
-    Response? response = await _apiManager.get("/C2/user/", params: params);
-    if (response == null) {
-      return null;
+    Map<String, dynamic>? responseBody =
+        await _apiManager.put("/C2/user/", {}, params: params);
+    if (responseBody == null || responseBody["data"] != null) {
+      return {"errorMessage": "Something went wrong, please try again."}.cast<String,dynamic>();
+    } else {
+      return responseBody["data"];
     }
-    return LoggedUser.fromJson(response.body);
   }
 
   @override
-  Future<LoggedUser?> logIn(String username, String password) async {
+  Future<Map<String, dynamic>?> logIn(String username, String password) async {
     Map<String, String> params = {
       "username": username,
       "password": password,
     };
-    Response? response =
+    Map<String, dynamic>? responseBody =
         await _apiManager.post("/C2/user/", {}, params: params);
-    if (response == null) {
-      return null;
+    if (responseBody == null || responseBody["data"] == null) {
+      return {"errorMessage": "Something went wrong, please try again."}.cast<String,dynamic>();
+    } else {
+      return responseBody["data"];
     }
-    return LoggedUser.fromJson(response.body);
   }
 }

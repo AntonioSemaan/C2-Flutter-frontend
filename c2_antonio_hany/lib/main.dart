@@ -15,9 +15,32 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Projet C2',
       theme: ThemeData(
-          primarySwatch: Colors.blue,
-          textTheme: const TextTheme(
-              headline3: TextStyle(fontSize: 16, fontWeight: FontWeight.bold,))),
+        primarySwatch: Colors.blue,
+        textTheme: const TextTheme(
+            headline1: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+            headline2: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+            headline3: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+            headline4: TextStyle(
+                fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
+            headline5: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+            subtitle2: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Colors.white54)),
+      ),
       home: const HomePage(title: 'C2 Home'),
     );
   }

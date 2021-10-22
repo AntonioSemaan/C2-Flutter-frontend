@@ -1,7 +1,8 @@
-import 'package:c2_antonio_hany/data_classes/logged_user.dart';
+import 'package:c2_antonio_hany/data_classes/user.dart';
 import 'package:c2_antonio_hany/globals.dart';
 import 'package:c2_antonio_hany/managers/api_manager.dart';
 import 'package:c2_antonio_hany/managers/main_api_repo.dart';
+import 'package:c2_antonio_hany/pages/dashboard_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart';
@@ -84,10 +85,8 @@ class _LogInFormFragmentState extends State<LogInFormFragment> {
             foregroundColor: MaterialStateProperty.all(Colors.white),
             backgroundColor: MaterialStateProperty.all(
                 const Color.fromRGBO(0, 133, 254, 1.0)),
-            textStyle: MaterialStateProperty.all(const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: Colors.white)),
+            textStyle: MaterialStateProperty.all(
+                Theme.of(context).textTheme.headline4),
           ),
           onPressed: () {
             if (formKey.currentState!.validate()) {
@@ -100,15 +99,24 @@ class _LogInFormFragmentState extends State<LogInFormFragment> {
   }
 
   Future callLoginApi() async {
-    LoggedUser? user =
+    Map<String, dynamic>? responseData =
         await MainApiRepo.userApiRepo.logIn(_username, _password);
 
-    if (user == null) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text("Something went wrong, please try again")));
+    if (responseData == null || responseData.containsKey("errorMessage")) {
+      String string = "Something went wrong, please try again";
+      if (responseData != null) {
+        string = responseData["errorMessage"];
+      }
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(backgroundColor: Colors.red, content: Text(string)));
+    } else if (!responseData["success"]) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          backgroundColor: Colors.red, content: Text(responseData["message"])));
     } else {
-      gLoggedUser = user;
-      //TODO: navigate to dashboard
+      gLoggedUser = User.fromJson(responseData["data"]);
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => DashboardPage()),
+          (route) => false);
     }
   }
 }

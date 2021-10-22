@@ -1,14 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
+import 'dart:typed_data';
 import 'package:c2_antonio_hany/constants.dart';
 import 'package:c2_antonio_hany/globals.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:http/browser_client.dart';
 import 'package:http/http.dart' as http;
-import 'package:http/io_client.dart';
 
 class APIManager {
   static final _httpClient = http.Client();
@@ -19,11 +14,11 @@ class APIManager {
 
   /// ** Params can be passed as optional arguments **
 
-  Future<http.Response?> get(String url,
-      {Map<String, String>? params, Map<String, String>? headers}) async {
+  Future<Map<String, dynamic>?> get(String url,
+      {Map<String, dynamic>? params, Map<String, String>? headers}) async {
     if (await _checkConnectConnectivityAndContinue()) {
       headers = {
-        "Content-Type": "application/json; charset=utf-8",
+        "Accept": "application/json; charset=utf-8",
       };
 
       try {
@@ -32,7 +27,9 @@ class APIManager {
             .get(uri, headers: headers)
             .timeout(
                 const Duration(seconds: Constants.TIMEOUT_DURATION_SECONDS));
-        return response;
+        Map<String, dynamic> responseBody =
+            analyzeResponseBodyBytes(response.bodyBytes);
+        return responseBody;
       } catch (ex) {
         print(ex);
       }
@@ -45,11 +42,11 @@ class APIManager {
 
   /// ** Params can be passed as optional arguments **
 
-  Future<http.Response?> post(String url, dynamic body,
-      {Map<String, String>? params, Map<String, String>? headers}) async {
+  Future<Map<String, dynamic>?> post(String url, dynamic body,
+      {Map<String, dynamic>? params, Map<String, String>? headers}) async {
     if (await _checkConnectConnectivityAndContinue()) {
       headers ??= {
-        "Content-Type": "application/json",
+        "Accept": "application/json; charset=utf-8",
       };
       http.Response response;
       try {
@@ -58,7 +55,9 @@ class APIManager {
             .post(uri, headers: headers, body: json.encode(body))
             .timeout(
                 const Duration(seconds: Constants.TIMEOUT_DURATION_SECONDS));
-        return response;
+        Map<String, dynamic> responseBody =
+            analyzeResponseBodyBytes(response.bodyBytes);
+        return responseBody;
       } catch (ex) {
         print(ex);
       }
@@ -71,11 +70,12 @@ class APIManager {
 
   /// ** Params can be passed as optional arguments **
 
-  Future<http.Response?> postWithFile(String url, Map<String, dynamic> body,
-      {Map<String, String>? params, Map<String, String>? headers}) async {
+  Future<Map<String, dynamic>?> postWithFile(
+      String url, Map<String, dynamic> body,
+      {Map<String, dynamic>? params, Map<String, String>? headers}) async {
     if (await _checkConnectConnectivityAndContinue()) {
       headers ??= {
-        "Content-Type": "application/json; charset=utf-8",
+        "Accept": "application/json; charset=utf-8",
       };
       try {
         final uri = Uri.https(gDomain, url, params);
@@ -92,21 +92,22 @@ class APIManager {
         var ioStreamedResponse = await _httpClient.send(request).timeout(
             const Duration(seconds: Constants.TIMEOUT_DURATION_SECONDS));
         var response = await http.Response.fromStream(ioStreamedResponse);
-
-        return response;
+        Map<String, dynamic> responseBody =
+            analyzeResponseBodyBytes(response.bodyBytes);
+        return responseBody;
       } catch (ex) {
         print(ex);
       }
     }
   }
 
-  Future<http.Response?> put(String url, dynamic body,
-      {Map<String, String>? params, Map<String, String>? headers}) async {
+  Future<Map<String, dynamic>?> put(String url, dynamic body,
+      {Map<String, dynamic>? params, Map<String, String>? headers}) async {
     if (await _checkConnectConnectivityAndContinue()) {
       // loggedUser.domain="192.168.16.5";
 
       headers ??= {
-        "Content-Type": "application/json; charset=utf-8",
+        "Accept": "application/json; charset=utf-8",
       };
 
       try {
@@ -116,7 +117,9 @@ class APIManager {
             .timeout(
                 const Duration(seconds: Constants.TIMEOUT_DURATION_SECONDS));
 
-        return response;
+        Map<String, dynamic> responseBody =
+            analyzeResponseBodyBytes(response.bodyBytes);
+        return responseBody;
       } catch (ex) {
         print(ex);
       }
@@ -131,11 +134,11 @@ class APIManager {
 
   /// ** Params can be passed as optional arguments **
 
-  Future<http.Response?> delete(String url,
-      {Map<String, String>? params, Map<String, String>? headers}) async {
+  Future<Map<String, dynamic>?> delete(String url,
+      {Map<String, dynamic>? params, Map<String, String>? headers}) async {
     if (await _checkConnectConnectivityAndContinue()) {
       headers ??= {
-        "Content-Type": "application/json; charset=utf-8",
+        "Accept": "application/json; charset=utf-8",
       };
       try {
         final uri = Uri.https(gDomain, url, params);
@@ -143,7 +146,9 @@ class APIManager {
             .delete(uri, headers: headers)
             .timeout(
                 const Duration(seconds: Constants.TIMEOUT_DURATION_SECONDS));
-        return response;
+        Map<String, dynamic> responseBody =
+            analyzeResponseBodyBytes(response.bodyBytes);
+        return responseBody;
       } catch (ex) {
         print(ex);
       }
@@ -155,5 +160,31 @@ class APIManager {
       return false;
     }
     return true;
+  }
+
+  Map<String, dynamic> analyzeResponseBodyBytes(Uint8List list) {
+    String string = String.fromCharCodes(list);
+    print(string);
+
+    Map<String, dynamic> jsonMap = json.decode(string) as Map<String, dynamic>;
+    Map<String, dynamic> toReturn2 = convertToMap(jsonMap);
+    // Map<String, dynamic> toReturn = Map.fromEntries(jsonMap.entries);
+    // Map<String, dynamic> firstData = Map.fromEntries(toReturn["data"].entries);
+    // Map<String, dynamic> secondData =
+    //     Map.fromEntries(firstData["data"].entries);
+    // toReturn["data"] = firstData;
+    // toReturn["data"]["data"] = secondData;
+    return toReturn2;
+  }
+
+  Map<String, dynamic> convertToMap(map) {
+    Map<String, dynamic> toReturn = Map.fromEntries(map.entries);
+    List<String> keys = toReturn.keys.toList();
+    for (String key in keys) {
+      if (toReturn[key].runtimeType.toString() == "_JsonMap") {
+        toReturn[key] = convertToMap(toReturn[key]);
+      }
+    }
+    return toReturn;
   }
 }

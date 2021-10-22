@@ -1,6 +1,7 @@
 import 'dart:io';
 
-import 'package:c2_antonio_hany/data_classes/logged_user.dart';
+import 'package:c2_antonio_hany/data_classes/user.dart';
+import 'package:c2_antonio_hany/enums.dart';
 import 'package:c2_antonio_hany/managers/main_api_repo.dart';
 import 'package:connectivity/connectivity.dart';
 
@@ -17,6 +18,8 @@ Future<bool> gCheckInternetConnection() async {
   }
 }
 
-String gDomain = "cbd3-185-120-28-52.eu.ngrok.io";
+String gDomain = "412c-185-120-28-52.eu.ngrok.io";
 
-LoggedUser? gLoggedUser;
+User? gLoggedUser;
+
+

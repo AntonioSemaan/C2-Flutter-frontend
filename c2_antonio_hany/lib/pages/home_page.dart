@@ -1,4 +1,6 @@
+import 'package:after_layout/after_layout.dart';
 import 'package:c2_antonio_hany/enums.dart';
+import 'package:c2_antonio_hany/globals.dart';
 import 'package:c2_antonio_hany/master.dart';
 import 'package:c2_antonio_hany/pages/dashboard_page.dart';
 import 'package:c2_antonio_hany/pages/signup_login_page.dart';
@@ -14,7 +16,7 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with AfterLayoutMixin<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,20 +58,16 @@ class _HomePageState extends State<HomePage> {
                 style: TextStyle(color: Color.fromRGBO(0, 133, 254, 1.0)),
               )),
         ),
-        TextButton(
-            style: ButtonStyle(
-              fixedSize: MaterialStateProperty.all(const Size(100, 40)),
-              backgroundColor: MaterialStateProperty.all(Colors.white),
-            ),
-            onPressed: () {
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => DashboardPage()));
-            },
-            child: const Text(
-              "For Testing",
-              style: TextStyle(color: Color.fromRGBO(0, 133, 254, 1.0)),
-            )),
       ],
     ));
+  }
+
+  @override
+  void afterFirstLayout(BuildContext context) {
+    if (gLoggedUser != null) {
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => DashboardPage()),
+          (route) => false);
+    }
   }
 }

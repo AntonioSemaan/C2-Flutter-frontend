@@ -1,7 +1,7 @@
 import 'package:c2_antonio_hany/enums.dart';
 import 'package:c2_antonio_hany/fragments/custom_expansion_panel.dart';
-import 'package:c2_antonio_hany/fragments/login_form_fragment.dart';
-import 'package:c2_antonio_hany/fragments/signup_form_fragment.dart';
+import 'package:c2_antonio_hany/fragments/login_signup/login_form_fragment.dart';
+import 'package:c2_antonio_hany/fragments/login_signup/signup_form_fragment.dart';
 import 'package:c2_antonio_hany/master.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
