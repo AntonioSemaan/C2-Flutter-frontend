@@ -1,7 +1,10 @@
+import 'package:c2_antonio_hany/data_classes/job_filters_sorts.dart';
+import 'package:c2_antonio_hany/data_classes/provider_classes.dart';
 import 'package:c2_antonio_hany/enums.dart';
 import 'package:c2_antonio_hany/fragments/dashboard/dashboard_panel_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 
 class DashboardFilterPanel extends StatefulWidget {
   const DashboardFilterPanel({Key? key}) : super(key: key);
@@ -11,10 +14,6 @@ class DashboardFilterPanel extends StatefulWidget {
 }
 
 class _DashboardFilterPanelState extends State<DashboardFilterPanel> {
-  JobExperience? currExperience;
-  JobEnvironment? currEnvironment;
-  JobType? currType;
-
   @override
   Widget build(BuildContext context) {
     return DashboardPanelWrapper(
@@ -24,15 +23,14 @@ class _DashboardFilterPanelState extends State<DashboardFilterPanel> {
           children: [
             Expanded(
                 child: Visibility(
-              visible: currType != null ||
-                  currEnvironment != null ||
-                  currExperience != null,
+              visible: context.read<JobFiltersSorts>().anyFiltersIsNotNull(),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextButton(
                     onPressed: () {
                       setState(() {
-                        currType = currEnvironment = currExperience = null;
+                        context.read<DashboardJobEnumWrapper>().value =
+                            context.read<DashboardJobEnumWrapper>().value;
                       });
                     },
                     child: Text("Apply",
@@ -65,15 +63,15 @@ class _DashboardFilterPanelState extends State<DashboardFilterPanel> {
             ),
             Expanded(
                 child: Visibility(
-              visible: currType != null ||
-                  currEnvironment != null ||
-                  currExperience != null,
+              visible: context.read<JobFiltersSorts>().anyFiltersIsNotNull(),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextButton(
                     onPressed: () {
                       setState(() {
-                        currType = currEnvironment = currExperience = null;
+                        context.read<JobFiltersSorts>().resetFiltersAndSorts();
+                        context.read<DashboardJobEnumWrapper>().value =
+                            context.read<DashboardJobEnumWrapper>().value;
                       });
                     },
                     child: Text("Clear",
@@ -113,28 +111,46 @@ class _DashboardFilterPanelState extends State<DashboardFilterPanel> {
                       RadioListTile<JobExperience>(
                           title: const Text("Junior"),
                           value: JobExperience.JUNIOR,
-                          groupValue: currExperience,
+                          groupValue: context
+                              .read<JobFiltersSorts>()
+                              .jobFilters
+                              .experience,
                           onChanged: (value) {
                             setState(() {
-                              currExperience = value!;
+                              context
+                                  .read<JobFiltersSorts>()
+                                  .jobFilters
+                                  .experience = value!;
                             });
                           }),
                       RadioListTile<JobExperience>(
                           title: const Text("Mid"),
                           value: JobExperience.MID,
-                          groupValue: currExperience,
+                          groupValue: context
+                              .read<JobFiltersSorts>()
+                              .jobFilters
+                              .experience,
                           onChanged: (value) {
                             setState(() {
-                              currExperience = value!;
+                              context
+                                  .read<JobFiltersSorts>()
+                                  .jobFilters
+                                  .experience = value!;
                             });
                           }),
                       RadioListTile<JobExperience>(
                           title: const Text("Senior"),
                           value: JobExperience.SENIOR,
-                          groupValue: currExperience,
+                          groupValue: context
+                              .read<JobFiltersSorts>()
+                              .jobFilters
+                              .experience,
                           onChanged: (value) {
                             setState(() {
-                              currExperience = value!;
+                              context
+                                  .read<JobFiltersSorts>()
+                                  .jobFilters
+                                  .experience = value!;
                             });
                           }),
                     ],
@@ -158,19 +174,31 @@ class _DashboardFilterPanelState extends State<DashboardFilterPanel> {
                       RadioListTile<JobEnvironment>(
                           title: const Text("On Site"),
                           value: JobEnvironment.ONSITE,
-                          groupValue: currEnvironment,
+                          groupValue: context
+                              .read<JobFiltersSorts>()
+                              .jobFilters
+                              .environment,
                           onChanged: (value) {
                             setState(() {
-                              currEnvironment = value!;
+                              context
+                                  .read<JobFiltersSorts>()
+                                  .jobFilters
+                                  .environment = value!;
                             });
                           }),
                       RadioListTile<JobEnvironment>(
                           title: const Text("Remote"),
                           value: JobEnvironment.REMOTE,
-                          groupValue: currEnvironment,
+                          groupValue: context
+                              .read<JobFiltersSorts>()
+                              .jobFilters
+                              .environment,
                           onChanged: (value) {
                             setState(() {
-                              currEnvironment = value!;
+                              context
+                                  .read<JobFiltersSorts>()
+                                  .jobFilters
+                                  .environment = value!;
                             });
                           }),
                     ],
@@ -194,37 +222,45 @@ class _DashboardFilterPanelState extends State<DashboardFilterPanel> {
                       RadioListTile<JobType>(
                           title: const Text("Internship"),
                           value: JobType.INTERNSHIP,
-                          groupValue: currType,
+                          groupValue:
+                              context.read<JobFiltersSorts>().jobFilters.type,
                           onChanged: (value) {
                             setState(() {
-                              currType = value!;
+                              context.read<JobFiltersSorts>().jobFilters.type =
+                                  value!;
                             });
                           }),
                       RadioListTile<JobType>(
                           title: const Text("Part-Time"),
                           value: JobType.PART_TIME,
-                          groupValue: currType,
+                          groupValue:
+                              context.read<JobFiltersSorts>().jobFilters.type,
                           onChanged: (value) {
                             setState(() {
-                              currType = value!;
+                              context.read<JobFiltersSorts>().jobFilters.type =
+                                  value!;
                             });
                           }),
                       RadioListTile<JobType>(
                           title: const Text("Full-Time"),
                           value: JobType.FULL_TIME,
-                          groupValue: currType,
+                          groupValue:
+                              context.read<JobFiltersSorts>().jobFilters.type,
                           onChanged: (value) {
                             setState(() {
-                              currType = value!;
+                              context.read<JobFiltersSorts>().jobFilters.type =
+                                  value!;
                             });
                           }),
                       RadioListTile<JobType>(
                           title: const Text("Freelance"),
                           value: JobType.FREELANCE,
-                          groupValue: currType,
+                          groupValue:
+                              context.read<JobFiltersSorts>().jobFilters.type,
                           onChanged: (value) {
                             setState(() {
-                              currType = value!;
+                              context.read<JobFiltersSorts>().jobFilters.type =
+                                  value!;
                             });
                           }),
                     ],

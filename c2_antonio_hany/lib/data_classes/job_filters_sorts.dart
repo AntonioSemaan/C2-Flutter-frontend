@@ -21,4 +21,20 @@ class JobFiltersSorts {
   String toJson() {
     return jsonEncode(toJsonMap());
   }
+
+  bool anyFiltersIsNotNull() {
+    return jobFilters.environment != null ||
+        jobFilters.experience != null ||
+        jobFilters.type != null;
+  }
+
+  bool anySortsIsNotDefault() {
+    return jobSorts.nameAscending != true ||
+        jobSorts.newestDate != true;
+  }
+
+  void resetFiltersAndSorts() {
+    jobFilters = JobFilters();
+    jobSorts = JobSorts();
+  }
 }

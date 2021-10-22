@@ -25,7 +25,9 @@ class _ProfilePageRightPanelState extends State<ProfilePageRightPanel> {
       case ProfilePageView.EXPERIENCE:
         return ExperienceFragment();
       case ProfilePageView.SKILLS:
-        return SkillsFragment();
+        return SkillsFragment(
+          skills: [],
+        );
       default:
         return Container();
     }

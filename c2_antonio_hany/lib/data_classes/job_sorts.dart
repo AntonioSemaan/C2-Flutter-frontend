@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:c2_antonio_hany/enums.dart';
-
 class JobSorts {
   late bool newestDate, oldestDate, nameAscending, nameDescending;
 

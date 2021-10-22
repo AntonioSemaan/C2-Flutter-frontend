@@ -1,3 +1,4 @@
+import 'package:c2_antonio_hany/data_classes/provider_classes.dart';
 import 'package:c2_antonio_hany/enums.dart';
 import 'package:c2_antonio_hany/globals.dart';
 import 'package:c2_antonio_hany/pages/contact_us.dart';
@@ -7,12 +8,12 @@ import 'package:c2_antonio_hany/pages/profile_page.dart';
 import 'package:c2_antonio_hany/pages/search_results_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 
 class Master extends StatefulWidget {
   final Widget content;
   final List<Widget>? toolBar;
   final List<Widget>? secondToolBar;
-  final bool? hasDefaultSecondToolBar;
   final MainAxisAlignment? toolBarAlignment;
   final MainAxisAlignment? secondToolBarAlignment;
   final String? title;
@@ -23,7 +24,6 @@ class Master extends StatefulWidget {
       required this.content,
       this.toolBar = const <Widget>[],
       this.secondToolBar = const <Widget>[],
-      this.hasDefaultSecondToolBar = false,
       this.toolBarAlignment = MainAxisAlignment.end,
       this.secondToolBarAlignment = MainAxisAlignment.center,
       this.title = "",
@@ -231,69 +231,7 @@ class _MasterState extends State<Master> {
             ],
           ),
           Container(
-              child: widget.hasDefaultSecondToolBar!
-                  ? Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Center(
-                        child: Container(
-                          height: 60,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: const Color.fromRGBO(0, 133, 254, 1.0),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: widget.secondToolBarAlignment!,
-                            children: [
-                              TextButton(
-                                style: ButtonStyle(
-                                  shape: MaterialStateProperty.all<
-                                          RoundedRectangleBorder>(
-                                      RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(18.0),
-                                          side: const BorderSide(
-                                              color: Color.fromRGBO(
-                                                  0, 133, 254, 1.0)))),
-                                  foregroundColor:
-                                      MaterialStateProperty.all(Colors.white),
-                                  backgroundColor: MaterialStateProperty.all(
-                                      const Color.fromRGBO(0, 133, 254, 1.0)),
-                                  textStyle: MaterialStateProperty.all(
-                                      Theme.of(context).textTheme.headline4),
-                                ),
-                                onPressed: () {},
-                                child: const Text(
-                                  "Job Offers",
-                                ),
-                              ),
-                              TextButton(
-                                style: ButtonStyle(
-                                  shape: MaterialStateProperty.all<
-                                          RoundedRectangleBorder>(
-                                      RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(18.0),
-                                          side: const BorderSide(
-                                              color: Color.fromRGBO(
-                                                  0, 133, 254, 1.0)))),
-                                  foregroundColor:
-                                      MaterialStateProperty.all(Colors.white),
-                                  backgroundColor: MaterialStateProperty.all(
-                                      const Color.fromRGBO(0, 133, 254, 1.0)),
-                                  textStyle: MaterialStateProperty.all(
-                                      Theme.of(context).textTheme.headline4),
-                                ),
-                                onPressed: () {},
-                                child: const Text(
-                                  "Job Requests",
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    )
-                  : widget.secondToolBar!.isEmpty
+              child: widget.secondToolBar!.isEmpty
                       ? Container(child: null)
                       : Row(
                           mainAxisAlignment: widget.secondToolBarAlignment!,

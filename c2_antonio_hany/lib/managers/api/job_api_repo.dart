@@ -11,7 +11,7 @@ class JobApiRepo implements IJobApiRepo {
   Future<Map<String, dynamic>?> create(Job job) async {
     Map<String, dynamic> body = job.toJsonMap();
     Map<String, dynamic>? responseBody = await _apiManager.put("C2/job/", body);
-    if (responseBody == null || responseBody["data"] != null) {
+    if (responseBody == null || responseBody["data"] == null) {
       return {"errorMessage": "Something went wrong, please try again."}
           .cast<String, dynamic>();
     } else {
@@ -22,9 +22,9 @@ class JobApiRepo implements IJobApiRepo {
   @override
   Future<Map<String, dynamic>?> fetchByEnum(JobEnum? jobEnum,
       String? searchText, JobFiltersSorts filtersSorts) async {
-    Map<String, dynamic> params = {};
+    Map<String, String> params = {};
     if (jobEnum != null) {
-      params["jobEnum"] = jobEnum.value;
+      params["jobEnum"] = jobEnum.value.toString();
     }
     if (searchText != null) {
       params["search"] = searchText;
@@ -33,7 +33,7 @@ class JobApiRepo implements IJobApiRepo {
 
     Map<String, dynamic>? responseBody =
         await _apiManager.post("C2/job/", body, params: params);
-    if (responseBody == null || responseBody["data"] != null) {
+    if (responseBody == null || responseBody["data"] == null) {
       return {"errorMessage": "Something went wrong, please try again."}
           .cast<String, dynamic>();
     } else {
@@ -43,12 +43,12 @@ class JobApiRepo implements IJobApiRepo {
 
   @override
   Future<Map<String, dynamic>?> fetchByUser(int userId) async {
-    Map<String, dynamic> params = {
-      "userId": userId,
+    Map<String, String> params = {
+      "userId": userId.toString(),
     };
     Map<String, dynamic>? responseBody =
         await _apiManager.get("C2/job/", params: params);
-    if (responseBody == null || responseBody["data"] != null) {
+    if (responseBody == null || responseBody["data"] == null) {
       return {"errorMessage": "Something went wrong, please try again."}
           .cast<String, dynamic>();
     } else {

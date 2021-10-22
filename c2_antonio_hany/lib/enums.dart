@@ -19,6 +19,17 @@ extension JobEnumExtension on JobEnum {
     }
   }
 
+  String get stringValue {
+    switch (this) {
+      case JobEnum.ALL:
+        return "All Types";
+      case JobEnum.JOB_OFFER:
+        return "Job Offer";
+      case JobEnum.JOB_REQUEST:
+        return "Job Request";
+    }
+  }
+
   static JobEnum? fromInt(int value) {
     switch (value) {
       case 0:
@@ -44,6 +55,19 @@ extension JobTypeExtension on JobType {
         return 3;
       case JobType.FREELANCE:
         return 4;
+    }
+  }
+
+  String get stringValue {
+    switch (this) {
+      case JobType.INTERNSHIP:
+        return "Internship";
+      case JobType.PART_TIME:
+        return "Part-Time";
+      case JobType.FULL_TIME:
+        return "Full-Time";
+      case JobType.FREELANCE:
+        return "Freelance";
     }
   }
 
@@ -75,6 +99,17 @@ extension JobExperienceExtension on JobExperience {
     }
   }
 
+  String get stringValue {
+    switch (this) {
+      case JobExperience.JUNIOR:
+        return "Junior";
+      case JobExperience.MID:
+        return "Mid";
+      case JobExperience.SENIOR:
+        return "Senior";
+    }
+  }
+
   static JobExperience? fromInt(int value) {
     switch (value) {
       case 1:
@@ -96,6 +131,15 @@ extension JobEnvironmentExtension on JobEnvironment {
         return 1;
       case JobEnvironment.ONSITE:
         return 2;
+    }
+  }
+
+  String get stringValue {
+    switch (this) {
+      case JobEnvironment.REMOTE:
+        return "Remote";
+      case JobEnvironment.ONSITE:
+        return "On Site";
     }
   }
 

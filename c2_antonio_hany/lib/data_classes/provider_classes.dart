@@ -6,7 +6,18 @@ class ProfilePageViewWrapper extends ChangeNotifier {
 
   ProfilePageView get value => _value;
 
-  void set value(ProfilePageView view) {
+  set value(ProfilePageView view) {
+    _value = view;
+    notifyListeners();
+  }
+}
+
+class DashboardJobEnumWrapper extends ChangeNotifier {
+  JobEnum _value = JobEnum.ALL;
+
+  JobEnum get value => _value;
+
+  set value(JobEnum view) {
     _value = view;
     notifyListeners();
   }

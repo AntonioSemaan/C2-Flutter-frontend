@@ -15,7 +15,7 @@ class APIManager {
   /// ** Params can be passed as optional arguments **
 
   Future<Map<String, dynamic>?> get(String url,
-      {Map<String, dynamic>? params, Map<String, String>? headers}) async {
+      {Map<String, String>? params, Map<String, String>? headers}) async {
     if (await _checkConnectConnectivityAndContinue()) {
       headers = {
         "Accept": "application/json; charset=utf-8",
@@ -43,7 +43,7 @@ class APIManager {
   /// ** Params can be passed as optional arguments **
 
   Future<Map<String, dynamic>?> post(String url, dynamic body,
-      {Map<String, dynamic>? params, Map<String, String>? headers}) async {
+      {Map<String, String>? params, Map<String, String>? headers}) async {
     if (await _checkConnectConnectivityAndContinue()) {
       headers ??= {
         "Accept": "application/json; charset=utf-8",
@@ -72,7 +72,7 @@ class APIManager {
 
   Future<Map<String, dynamic>?> postWithFile(
       String url, Map<String, dynamic> body,
-      {Map<String, dynamic>? params, Map<String, String>? headers}) async {
+      {Map<String, String>? params, Map<String, String>? headers}) async {
     if (await _checkConnectConnectivityAndContinue()) {
       headers ??= {
         "Accept": "application/json; charset=utf-8",
@@ -102,7 +102,7 @@ class APIManager {
   }
 
   Future<Map<String, dynamic>?> put(String url, dynamic body,
-      {Map<String, dynamic>? params, Map<String, String>? headers}) async {
+      {Map<String, String>? params, Map<String, String>? headers}) async {
     if (await _checkConnectConnectivityAndContinue()) {
       // loggedUser.domain="192.168.16.5";
 
@@ -135,7 +135,7 @@ class APIManager {
   /// ** Params can be passed as optional arguments **
 
   Future<Map<String, dynamic>?> delete(String url,
-      {Map<String, dynamic>? params, Map<String, String>? headers}) async {
+      {Map<String, String>? params, Map<String, String>? headers}) async {
     if (await _checkConnectConnectivityAndContinue()) {
       headers ??= {
         "Accept": "application/json; charset=utf-8",
@@ -181,8 +181,16 @@ class APIManager {
     Map<String, dynamic> toReturn = Map.fromEntries(map.entries);
     List<String> keys = toReturn.keys.toList();
     for (String key in keys) {
-      if (toReturn[key].runtimeType.toString() == "_JsonMap") {
+      if (toReturn[key].runtimeType.toString().contains("_JsonMap")) {
         toReturn[key] = convertToMap(toReturn[key]);
+      }
+      if (toReturn[key].runtimeType.toString().contains("List")) {
+        List list = toReturn[key];
+        for (int i = 0; i < list.length; i++) {
+          if (list[i].runtimeType.toString().contains("_JsonMap")) {
+            toReturn[key][i] = convertToMap(toReturn[key][i]);
+          }
+        }
       }
     }
     return toReturn;

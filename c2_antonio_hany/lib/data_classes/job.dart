@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:c2_antonio_hany/data_classes/user.dart';
 import 'package:c2_antonio_hany/enums.dart';
+import 'package:c2_antonio_hany/globals.dart';
 
 class Job {
   int? id;
@@ -46,12 +47,16 @@ class Job {
     jobType = JobTypeExtension.fromInt(data["jtId"]);
     jobExperience = JobExperienceExtension.fromInt(data["jexpId"]);
     jobEnvironment = JobEnvironmentExtension.fromInt(data["jenvId"]);
-    title = data["JobTitle"];
+    title = data["jobTitle"];
     description = data["jobDescription"];
     salaryFrom = data["jobSalaryFrom"];
     salaryTo = data["jobSalaryTo"];
-    deadline = data["jobDeadline"];
-    creationDate = data["jobCreationDate"];
+    if (data["jobDeadline"] != "") {
+      deadline = gDatabaseFormat.parse(data["jobDeadline"]);
+    }
+    if (data["jobCreationDate"] != "") {
+      creationDate = gDatabaseStampFormat.parse(data["jobCreationDate"]);
+    }
   }
 
   Map<String, dynamic> toJsonMap() {
