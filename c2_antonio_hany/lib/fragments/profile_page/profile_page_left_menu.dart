@@ -5,7 +5,8 @@ import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 class ProfilePageLeftMenu extends StatefulWidget {
-  ProfilePageLeftMenu({Key? key}) : super(key: key);
+  ProfilePageView pageView;
+  ProfilePageLeftMenu({Key? key,required this.pageView}) : super(key: key);
 
   @override
   _ProfilePageLeftMenuState createState() => _ProfilePageLeftMenuState();
@@ -21,6 +22,7 @@ class _ProfilePageLeftMenuState extends State<ProfilePageLeftMenu> {
 
   @override
   Widget build(BuildContext context) {
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ListView.builder(
@@ -34,22 +36,20 @@ class _ProfilePageLeftMenuState extends State<ProfilePageLeftMenu> {
                         color: Color.fromRGBO(0, 133, 254, 1.0))),
                 tileColor: Colors.white,
                 selectedTileColor: const Color.fromRGBO(0, 133, 254, 1.0),
-                selected: panelsMap.entries.elementAt(index).key ==
-                    context.read<ProfilePageViewWrapper>().value,
+                selected:
+                    panelsMap.entries.elementAt(index).key == widget.pageView,
                 title: Text(
                   panelsMap.entries.elementAt(index).value,
                   style: TextStyle(
                       color: panelsMap.entries.elementAt(index).key ==
-                              context.read<ProfilePageViewWrapper>().value
+                              widget.pageView
                           ? Colors.white
                           : const Color.fromRGBO(0, 133, 254, 1.0)),
                   textAlign: TextAlign.center,
                 ),
                 onTap: () {
-                  setState(() {
-                    context.read<ProfilePageViewWrapper>().value =
-                        panelsMap.entries.elementAt(index).key;
-                  });
+                  context.read<ProfilePageViewWrapper>().value =
+                      panelsMap.entries.elementAt(index).key;
                 },
               ),
             );

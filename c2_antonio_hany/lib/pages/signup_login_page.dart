@@ -86,15 +86,17 @@ class _SignUpLogInPageState extends State<SignUpLogInPage> {
                     if (isOpen) {
                       return;
                     } else {
-                      setState(() {
-                        for (int i = 0; i < isOpens.length; i++) {
-                          if (i == index) {
-                            isOpens[i] = !isOpens[i];
-                          } else {
-                            isOpens[i] = false;
+                      if (mounted) {
+                        setState(() {
+                          for (int i = 0; i < isOpens.length; i++) {
+                            if (i == index) {
+                              isOpens[i] = !isOpens[i];
+                            } else {
+                              isOpens[i] = false;
+                            }
                           }
-                        }
-                      });
+                        });
+                      }
                     }
                   },
                 ),

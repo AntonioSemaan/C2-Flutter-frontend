@@ -45,9 +45,13 @@ class _LogInFormFragmentState extends State<LogInFormFragment> {
         autovalidateMode: AutovalidateMode.disabled,
         validator: (value) =>
             value!.length > 2 ? null : "Enter at least 3 characters",
-        onSaved: (value) => setState(() {
-          _username = value!;
-        }),
+        onSaved: (value) {
+          if (mounted) {
+            setState(() {
+              _username = value!;
+            });
+          }
+        },
       ),
     );
   }
@@ -56,18 +60,21 @@ class _LogInFormFragmentState extends State<LogInFormFragment> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextFormField(
-        decoration: const InputDecoration(
-          label: Text("Password"),
-          border: OutlineInputBorder(),
-        ),
-        obscureText: true,
-        autovalidateMode: AutovalidateMode.disabled,
-        validator: (value) =>
-            value!.length > 2 ? null : "Enter at least 3 characters",
-        onSaved: (value) => setState(() {
-          _password = value!;
-        }),
-      ),
+          decoration: const InputDecoration(
+            label: Text("Password"),
+            border: OutlineInputBorder(),
+          ),
+          obscureText: true,
+          autovalidateMode: AutovalidateMode.disabled,
+          validator: (value) =>
+              value!.length > 2 ? null : "Enter at least 3 characters",
+          onSaved: (value) {
+            if(mounted) {
+              setState(() {
+              _password = value!;
+            });
+            }
+          }),
     );
   }
 

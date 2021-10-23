@@ -30,11 +30,15 @@ class _DashBoardSortingPanelState extends State<DashBoardSortingPanel> {
                 padding: const EdgeInsets.all(8.0),
                 child: TextButton(
                     onPressed: () {
-                      setState(() {
-                        context.read<JobFiltersSorts>().resetFiltersAndSorts();
-                        context.read<DashboardJobEnumWrapper>().value =
-                            context.read<DashboardJobEnumWrapper>().value;
-                      });
+                      if (mounted) {
+                        setState(() {
+                          context
+                              .read<JobFiltersSorts>()
+                              .resetFiltersAndSorts();
+                          context.read<DashboardJobEnumWrapper>().value =
+                              context.read<DashboardJobEnumWrapper>().value;
+                        });
+                      }
                     },
                     child: Text("Clear",
                         style: Theme.of(context).textTheme.headline4),
@@ -68,10 +72,12 @@ class _DashBoardSortingPanelState extends State<DashBoardSortingPanel> {
                 padding: const EdgeInsets.all(8.0),
                 child: TextButton(
                     onPressed: () {
-                      setState(() {
-                        context.read<DashboardJobEnumWrapper>().value =
-                            context.read<DashboardJobEnumWrapper>().value;
-                      });
+                      if (mounted) {
+                        setState(() {
+                          context.read<DashboardJobEnumWrapper>().value =
+                              context.read<DashboardJobEnumWrapper>().value;
+                        });
+                      }
                     },
                     child: Text("Apply",
                         style: Theme.of(context).textTheme.headline4),
@@ -112,40 +118,60 @@ class _DashBoardSortingPanelState extends State<DashBoardSortingPanel> {
                     value: "newest",
                     groupValue: currentByDate,
                     onChanged: (value) {
-                      setState(() {
-                        currentByDate = value!;
-                        if (value == "newest") {
-                          context.read<JobFiltersSorts>().jobSorts.newestDate =
-                              true;
-                          context.read<JobFiltersSorts>().jobSorts.oldestDate =
-                              false;
-                        } else {
-                          context.read<JobFiltersSorts>().jobSorts.newestDate =
-                              false;
-                          context.read<JobFiltersSorts>().jobSorts.oldestDate =
-                              true;
-                        }
-                      });
+                      if (mounted) {
+                        setState(() {
+                          currentByDate = value!;
+                          if (value == "newest") {
+                            context
+                                .read<JobFiltersSorts>()
+                                .jobSorts
+                                .newestDate = true;
+                            context
+                                .read<JobFiltersSorts>()
+                                .jobSorts
+                                .oldestDate = false;
+                          } else {
+                            context
+                                .read<JobFiltersSorts>()
+                                .jobSorts
+                                .newestDate = false;
+                            context
+                                .read<JobFiltersSorts>()
+                                .jobSorts
+                                .oldestDate = true;
+                          }
+                        });
+                      }
                     }),
                 RadioListTile<String>(
                     title: const Text("Oldest"),
                     value: "oldest",
                     groupValue: currentByDate,
                     onChanged: (value) {
-                      setState(() {
-                        currentByDate = value!;
-                        if (value == "newest") {
-                          context.read<JobFiltersSorts>().jobSorts.newestDate =
-                              true;
-                          context.read<JobFiltersSorts>().jobSorts.oldestDate =
-                              false;
-                        } else {
-                          context.read<JobFiltersSorts>().jobSorts.newestDate =
-                              false;
-                          context.read<JobFiltersSorts>().jobSorts.oldestDate =
-                              true;
-                        }
-                      });
+                      if (mounted) {
+                        setState(() {
+                          currentByDate = value!;
+                          if (value == "newest") {
+                            context
+                                .read<JobFiltersSorts>()
+                                .jobSorts
+                                .newestDate = true;
+                            context
+                                .read<JobFiltersSorts>()
+                                .jobSorts
+                                .oldestDate = false;
+                          } else {
+                            context
+                                .read<JobFiltersSorts>()
+                                .jobSorts
+                                .newestDate = false;
+                            context
+                                .read<JobFiltersSorts>()
+                                .jobSorts
+                                .oldestDate = true;
+                          }
+                        });
+                      }
                     })
               ],
             ),
@@ -170,56 +196,60 @@ class _DashBoardSortingPanelState extends State<DashBoardSortingPanel> {
                     value: "ascending",
                     groupValue: currentByName,
                     onChanged: (value) {
-                      setState(() {
-                        currentByName = value!;
-                        if (value == "ascending") {
-                          context
-                              .read<JobFiltersSorts>()
-                              .jobSorts
-                              .nameAscending = true;
-                          context
-                              .read<JobFiltersSorts>()
-                              .jobSorts
-                              .nameDescending = false;
-                        } else {
-                          context
-                              .read<JobFiltersSorts>()
-                              .jobSorts
-                              .nameAscending = false;
-                          context
-                              .read<JobFiltersSorts>()
-                              .jobSorts
-                              .nameDescending = true;
-                        }
-                      });
+                      if (mounted) {
+                        setState(() {
+                          currentByName = value!;
+                          if (value == "ascending") {
+                            context
+                                .read<JobFiltersSorts>()
+                                .jobSorts
+                                .nameAscending = true;
+                            context
+                                .read<JobFiltersSorts>()
+                                .jobSorts
+                                .nameDescending = false;
+                          } else {
+                            context
+                                .read<JobFiltersSorts>()
+                                .jobSorts
+                                .nameAscending = false;
+                            context
+                                .read<JobFiltersSorts>()
+                                .jobSorts
+                                .nameDescending = true;
+                          }
+                        });
+                      }
                     }),
                 RadioListTile<String>(
                     title: const Text("Descending"),
                     value: "descending",
                     groupValue: currentByName,
                     onChanged: (value) {
-                      setState(() {
-                        currentByName = value!;
-                        if (value == "ascending") {
-                          context
-                              .read<JobFiltersSorts>()
-                              .jobSorts
-                              .nameAscending = true;
-                          context
-                              .read<JobFiltersSorts>()
-                              .jobSorts
-                              .nameDescending = false;
-                        } else {
-                          context
-                              .read<JobFiltersSorts>()
-                              .jobSorts
-                              .nameAscending = false;
-                          context
-                              .read<JobFiltersSorts>()
-                              .jobSorts
-                              .nameDescending = true;
-                        }
-                      });
+                      if (mounted) {
+                        setState(() {
+                          currentByName = value!;
+                          if (value == "ascending") {
+                            context
+                                .read<JobFiltersSorts>()
+                                .jobSorts
+                                .nameAscending = true;
+                            context
+                                .read<JobFiltersSorts>()
+                                .jobSorts
+                                .nameDescending = false;
+                          } else {
+                            context
+                                .read<JobFiltersSorts>()
+                                .jobSorts
+                                .nameAscending = false;
+                            context
+                                .read<JobFiltersSorts>()
+                                .jobSorts
+                                .nameDescending = true;
+                          }
+                        });
+                      }
                     })
               ],
             ),

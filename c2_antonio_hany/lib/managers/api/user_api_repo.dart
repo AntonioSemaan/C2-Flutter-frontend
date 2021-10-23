@@ -43,4 +43,24 @@ class UserApiRepo implements IUserApiRepo {
       return responseBody["data"];
     }
   }
+
+  @override
+  Future<Map<String, dynamic>?> fetchUser(int userId) async {
+    Map<String, String> params = {
+      "userId": userId.toString(),
+    };
+    Map<String, dynamic>? responseBody =
+        await _apiManager.post("/C2/user/", {}, params: params);
+    if (responseBody == null || responseBody["data"] == null) {
+      return {"errorMessage": "Something went wrong, please try again."}.cast<String,dynamic>();
+    } else {
+      return responseBody["data"];
+    }
+  }
+
+  @override
+  Future<Map<String, dynamic>?> updateUser(User user) {
+    // TODO: implement updateUser
+    throw UnimplementedError();
+  }
 }

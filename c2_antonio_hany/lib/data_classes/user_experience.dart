@@ -8,6 +8,7 @@ class UserExperience {
   String? title;
   DateTime? dateFrom;
   DateTime? dateTo;
+  String? description;
   DateTime? creationDate;
 
   UserExperience(
@@ -16,6 +17,7 @@ class UserExperience {
       this.title,
       this.dateFrom,
       this.dateTo,
+      this.description,
       this.creationDate});
 
   UserExperience.fromJson(data) {
@@ -33,6 +35,9 @@ class UserExperience {
     }
     if (data["dateTo"] != null) {
       dateTo = gDatabaseFormat.parse(data["dateTo"]);
+    }
+    if (data["description"] != null) {
+      description = data["description"];
     }
     if (data["creationDate"] != null) {
       creationDate = gDatabaseStampFormat.parse(data["creationDate"]);
@@ -57,6 +62,10 @@ class UserExperience {
     if (dateTo != null) {
       toReturn["dateTo"] = gDatabaseFormat.format(dateTo!);
     }
+    if (description != null) {
+      toReturn["description"] = description;
+    }
+
     if (creationDate != null) {
       toReturn["creationDate"] = gDatabaseStampFormat.format(creationDate!);
     }

@@ -5,6 +5,10 @@ class UserSkill {
 
   UserSkill(this.name);
 
+  UserSkill.fromJson(data) {
+    name = data["name"];
+  }
+
   Map<String, dynamic> toJsonMap() {
     return {
       "name": name!,

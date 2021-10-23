@@ -32,8 +32,7 @@ class _DashboardTimelinePanelState extends State<DashboardTimelinePanel> {
               return Center(
                 child: Text("Error: " + snapshot.error.toString()),
               );
-            } else if (!snapshot.hasData &&
-                snapshot.connectionState != ConnectionState.done) {
+            } else if (snapshot.connectionState != ConnectionState.done) {
               return const Center(
                 child: CircularProgressIndicator(),
               );

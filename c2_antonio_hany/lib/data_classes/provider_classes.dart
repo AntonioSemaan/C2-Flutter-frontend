@@ -1,3 +1,5 @@
+import 'package:c2_antonio_hany/data_classes/user_education.dart';
+import 'package:c2_antonio_hany/data_classes/user_experience.dart';
 import 'package:c2_antonio_hany/enums.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -21,4 +23,32 @@ class DashboardJobEnumWrapper extends ChangeNotifier {
     _value = view;
     notifyListeners();
   }
+}
+
+class EducationListWrapper extends ChangeNotifier {
+  List<UserEducation> _userEducations = [];
+
+  List<UserEducation> get value => _userEducations;
+
+  set value(List<UserEducation> educations) {
+    _userEducations = educations;
+    notifyListeners();
+  }
+}
+
+class ExperienceListWrapper extends ChangeNotifier {
+  List<UserExperience> _userExperiences = [];
+
+  List<UserExperience> get value => _userExperiences;
+
+  set value(List<UserExperience> experiences) {
+    _userExperiences = experiences;
+    notifyListeners();
+  }
+}
+
+class UserIdWrapper {
+  int value;
+
+  UserIdWrapper(this.value);
 }

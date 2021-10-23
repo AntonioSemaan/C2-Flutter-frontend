@@ -7,26 +7,39 @@ class User {
   String lastName;
   String email;
   String title;
+  String? password;
 
-  User(
-      {required this.userId,
-      required this.username,
-      required this.firstName,
-      required this.lastName,
-      required this.email,
-      required this.title});
+  User({
+    required this.userId,
+    required this.username,
+    required this.firstName,
+    required this.lastName,
+    required this.email,
+    required this.title,
+    this.password,
+  });
 
   String get fullname => firstName + " " + lastName;
 
-  String toJson() {
-    return jsonEncode({
+  Map<String, dynamic> toJsonMap() {
+    Map<String, dynamic> toReturn = {
       "id": userId,
       "username": username,
       "firstName": firstName,
       "lastName": lastName,
       "email": email,
       "title": title
-    });
+    };
+
+    if (password != null) {
+      toReturn["password"] = password;
+    }
+
+    return toReturn;
+  }
+
+  String toJson() {
+    return jsonEncode(toJsonMap());
   }
 
   User.fromJson(data)

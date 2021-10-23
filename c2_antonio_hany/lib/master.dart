@@ -81,7 +81,7 @@ class Master extends StatefulWidget {
             : () {
                 Navigator.of(context)
                     .push(MaterialPageRoute(builder: (context) {
-                  return ProfilePage();
+                  return ProfilePage(userId: gLoggedUser!.userId,);
                 }));
               },
         child: const Text(

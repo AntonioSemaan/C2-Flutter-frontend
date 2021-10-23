@@ -51,10 +51,13 @@ class ProfileApiRepo implements IProfileApiRepo {
 
   @override
   Future<Map<String, dynamic>?> updateUserEducation(
-      int userId, UserEducation education) async {
+      int userId, List<UserEducation> educations) async {
     Map<String, String> params = {"userId": userId.toString()};
 
-    Map<String, dynamic> body = education.toJsonMap();
+    List<Map<String, dynamic>> bodyList =
+        educations.map((e) => e.toJsonMap()).toList();
+
+    Map<String, dynamic> body = {"education": bodyList};
 
     Map<String, dynamic>? responseBody =
         await apiManager.put("C2/user/education", body, params: params);
@@ -67,11 +70,14 @@ class ProfileApiRepo implements IProfileApiRepo {
   }
 
   @override
-  Future<Map<String, dynamic>?> updateUserExperience(
-      int userId, UserExperience experience) async {
+  Future<Map<String, dynamic>?> updateUserExperiences(
+      int userId, List<UserExperience> experiences) async {
     Map<String, String> params = {"userId": userId.toString()};
 
-    Map<String, dynamic> body = experience.toJsonMap();
+    List<Map<String, dynamic>> bodyList =
+        experiences.map((e) => e.toJsonMap()).toList();
+
+    Map<String, dynamic> body = {"experience": bodyList};
 
     Map<String, dynamic>? responseBody =
         await apiManager.put("C2/user/experience", body, params: params);
@@ -88,10 +94,13 @@ class ProfileApiRepo implements IProfileApiRepo {
       int userId, List<UserSkill> skills) async {
     Map<String, String> params = {"userId": userId.toString()};
 
-    List<Map<String, dynamic>> body = skills.map((e) => e.toJsonMap()).toList();
+    List<Map<String, dynamic>> bodyList =
+        skills.map((e) => e.toJsonMap()).toList();
+
+    Map<String, dynamic> body = {"skills": bodyList};
 
     Map<String, dynamic>? responseBody =
-        await apiManager.put("C2/user/experience", body, params: params);
+        await apiManager.put("C2/user/skills", body, params: params);
     if (responseBody == null || responseBody["data"] == null) {
       return {"errorMessage": "Something went wrong, please try again."}
           .cast<String, dynamic>();

@@ -58,9 +58,13 @@ class _SignUpFormFragmentState extends State<SignUpFormFragment> {
         autovalidateMode: AutovalidateMode.disabled,
         validator: (value) =>
             value!.length > 2 ? null : "Enter at least 3 characters",
-        onSaved: (value) => setState(() {
-          _username = value!;
-        }),
+        onSaved: (value) {
+          if (mounted) {
+            setState(() {
+              _username = value!;
+            });
+          }
+        },
       ),
     );
   }
@@ -77,9 +81,13 @@ class _SignUpFormFragmentState extends State<SignUpFormFragment> {
         autovalidateMode: AutovalidateMode.disabled,
         validator: (value) =>
             value!.length > 2 ? null : "Enter at least 3 characters",
-        onChanged: (value) => setState(() {
-          _password = value;
-        }),
+        onChanged: (value) {
+          if (mounted) {
+            setState(() {
+              _password = value;
+            });
+          }
+        },
       ),
     );
   }
@@ -103,9 +111,13 @@ class _SignUpFormFragmentState extends State<SignUpFormFragment> {
             return null;
           }
         },
-        onChanged: (value) => setState(() {
+        onChanged: (value) {
+          if(mounted) {
+            setState(() {
           _confirmPassword = value;
-        }),
+        });
+          }
+        },
       ),
     );
   }
@@ -124,9 +136,13 @@ class _SignUpFormFragmentState extends State<SignUpFormFragment> {
                     .hasMatch(value!)
                 ? null
                 : "Please enter a valid email address",
-        onSaved: (value) => setState(() {
+        onSaved: (value) {
+         if(mounted) {
+           setState(() {
           _email = value!;
-        }),
+        });
+         }
+        },
       ),
     );
   }
@@ -142,9 +158,13 @@ class _SignUpFormFragmentState extends State<SignUpFormFragment> {
         autovalidateMode: AutovalidateMode.disabled,
         validator: (value) =>
             value!.length > 1 ? null : "Enter at least 2 characters",
-        onSaved: (value) => setState(() {
+        onSaved: (value) {
+         if(mounted) {
+           setState(() {
           _firstName = value!;
-        }),
+        });
+         }
+        },
       ),
     );
   }
@@ -160,9 +180,13 @@ class _SignUpFormFragmentState extends State<SignUpFormFragment> {
         autovalidateMode: AutovalidateMode.disabled,
         validator: (value) =>
             value!.length > 1 ? null : "Enter at least 2 characters",
-        onSaved: (value) => setState(() {
+        onSaved: (value) {
+         if(mounted) {
+           setState(() {
           _lastName = value!;
-        }),
+        });
+         }
+        },
       ),
     );
   }
@@ -178,9 +202,13 @@ class _SignUpFormFragmentState extends State<SignUpFormFragment> {
         autovalidateMode: AutovalidateMode.disabled,
         validator: (value) =>
             value!.length > 4 ? null : "Enter at least 5 characters",
-        onSaved: (value) => setState(() {
+        onSaved: (value) {
+         if(mounted) {
+           setState(() {
           _title = value!;
-        }),
+        });
+         }
+        },
       ),
     );
   }
@@ -229,7 +257,7 @@ class _SignUpFormFragmentState extends State<SignUpFormFragment> {
     } else {
       gLoggedUser = User.fromJson(responseData["data"]);
       Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => ProfilePage()),
+          MaterialPageRoute(builder: (context) => ProfilePage(userId: gLoggedUser!.userId)),
           (route) => false);
     }
   }
