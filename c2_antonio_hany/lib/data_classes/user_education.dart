@@ -22,7 +22,8 @@ class UserEducation {
 
   UserEducation.fromJson(data) {
     if (data["data"] != null) {
-      id = data["id"];
+      id =
+          data["id"].runtimeType == String ? int.parse(data["id"]) : data["id"];
     }
     if (data["name"] != null) {
       name = data["name"];

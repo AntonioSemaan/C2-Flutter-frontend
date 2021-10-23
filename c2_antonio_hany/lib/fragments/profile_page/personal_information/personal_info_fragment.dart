@@ -1,8 +1,8 @@
 import 'package:c2_antonio_hany/data_classes/provider_classes.dart';
 import 'package:c2_antonio_hany/data_classes/user.dart';
-import 'package:c2_antonio_hany/fragments/profile_page/education_fragment.dart';
-import 'package:c2_antonio_hany/fragments/profile_page/profile_page_fragment_wrapper.dart';
-import 'package:c2_antonio_hany/fragments/profile_page/profile_page_panel_wrapper.dart';
+import 'package:c2_antonio_hany/fragments/profile_page/education/education_fragment.dart';
+import 'package:c2_antonio_hany/fragments/profile_page/wrappers/profile_page_fragment_wrapper.dart';
+import 'package:c2_antonio_hany/fragments/profile_page/wrappers/profile_page_panel_wrapper.dart';
 import 'package:c2_antonio_hany/globals.dart';
 import 'package:c2_antonio_hany/managers/main_api_repo.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +10,8 @@ import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 class PersonalInfoFragment extends StatefulWidget {
-  PersonalInfoFragment({Key? key}) : super(key: key);
+  User user;
+  PersonalInfoFragment({Key? key, required this.user}) : super(key: key);
 
   @override
   _PersonalInfoFragmentState createState() => _PersonalInfoFragmentState();
@@ -19,7 +20,6 @@ class PersonalInfoFragment extends StatefulWidget {
 class _PersonalInfoFragmentState extends State<PersonalInfoFragment> {
   final formKey = GlobalKey<FormState>();
   late bool inEditMode;
-  late User user;
 
   @override
   void initState() {
@@ -28,88 +28,49 @@ class _PersonalInfoFragmentState extends State<PersonalInfoFragment> {
 
   @override
   Widget build(BuildContext context) {
-    return ProfilePagePanelWrapper(
-        child: Column(
-      children: [
-        FutureBuilder(
-            future: MainApiRepo.userApiRepo
-                .fetchUser(context.read<UserIdWrapper>().value),
-            builder: (context, snapshot) {
-              if (snapshot.hasError) {
-                return Center(
-                  child: Text("Error: " + snapshot.error!.toString()),
-                );
-              } else if (snapshot.connectionState != ConnectionState.done) {
-                return const Center(
-                    child: CircularProgressIndicator(color: Colors.white));
-              } else if (snapshot.hasData) {
-                Map<String, dynamic>? responseData =
-                    snapshot.data as Map<String, dynamic>;
-                if (responseData == null ||
-                    responseData.containsKey("errorMessage")) {
-                  String string = "Something went wrong, please try again";
-                  if (responseData != null) {
-                    string = responseData["errorMessage"];
-                  }
-                  return Center(
-                    child: Text(string),
-                  );
-                } else if (!responseData["success"]) {
-                  return Center(
-                    child: Text(responseData["message"]),
-                  );
-                } else {
-                  user = User.fromJson(["data"]);
-                  inEditMode = gLoggedUser!.userId == user.userId;
-                  return ProfilePageFragmentWrapper(
-                      child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      width: 300,
-                      child: Form(
-                        key: formKey,
-                        child: Column(
-                          children: [
-                            buildUsernameField(),
-                            buildFirstNameField(),
-                            buildLastNameField(),
-                            buildTitleField(),
-                            buildEmailField(),
-                            Visibility(
-                                visible: inEditMode,
-                                child: buildPasswordField()),
-                            Visibility(
-                              visible: inEditMode,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  buildRestore(),
-                                  buildSubmit(),
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
+    inEditMode = gLoggedUser!.userId == widget.user.userId;
+    return ProfilePageFragmentWrapper(
+        desiredHeight: 475,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            width: 300,
+            height: double.infinity,
+            child: Form(
+              key: formKey,
+              child: Column(
+                children: [
+                  buildUsernameField(),
+                  buildFirstNameField(),
+                  buildLastNameField(),
+                  buildTitleField(),
+                  buildEmailField(),
+                  Visibility(visible: inEditMode, child: buildPasswordField()),
+                  Visibility(
+                    visible: inEditMode,
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 10.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          buildRestore(),
+                          buildSubmit(),
+                        ],
                       ),
                     ),
-                  ));
-                }
-              } else {
-                return const Center(
-                  child: Text(
-                      "Something went wrong while retreiving the experiences"),
-                );
-              }
-            }),
-      ],
-    ));
+                  )
+                ],
+              ),
+            ),
+          ),
+        ));
   }
 
   Widget buildUsernameField() {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextFormField(
-        initialValue: user.username,
+        initialValue: widget.user.username,
         decoration: const InputDecoration(
           label: Text("Username"),
           border: OutlineInputBorder(),
@@ -121,7 +82,7 @@ class _PersonalInfoFragmentState extends State<PersonalInfoFragment> {
         onSaved: (value) {
           if (mounted) {
             setState(() {
-              user.username = value!;
+              widget.user.username = value!;
             });
           }
         },
@@ -145,7 +106,7 @@ class _PersonalInfoFragmentState extends State<PersonalInfoFragment> {
         onChanged: (value) {
           if (mounted) {
             setState(() {
-              user.password = value;
+              widget.user.password = value;
             });
           }
         },
@@ -157,7 +118,7 @@ class _PersonalInfoFragmentState extends State<PersonalInfoFragment> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextFormField(
-        initialValue: user.email,
+        initialValue: widget.user.email,
         decoration: const InputDecoration(
           label: Text("Email"),
           border: OutlineInputBorder(),
@@ -172,7 +133,7 @@ class _PersonalInfoFragmentState extends State<PersonalInfoFragment> {
         onSaved: (value) {
           if (mounted) {
             setState(() {
-              user.email = value!;
+              widget.user.email = value!;
             });
           }
         },
@@ -184,7 +145,7 @@ class _PersonalInfoFragmentState extends State<PersonalInfoFragment> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextFormField(
-        initialValue: user.firstName,
+        initialValue: widget.user.firstName,
         decoration: const InputDecoration(
           label: Text("First Name"),
           border: OutlineInputBorder(),
@@ -196,7 +157,7 @@ class _PersonalInfoFragmentState extends State<PersonalInfoFragment> {
         onSaved: (value) {
           if (mounted) {
             setState(() {
-              user.firstName = value!;
+              widget.user.firstName = value!;
             });
           }
         },
@@ -208,7 +169,7 @@ class _PersonalInfoFragmentState extends State<PersonalInfoFragment> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextFormField(
-        initialValue: user.lastName,
+        initialValue: widget.user.lastName,
         decoration: const InputDecoration(
           label: Text("Last Name"),
           border: OutlineInputBorder(),
@@ -220,7 +181,7 @@ class _PersonalInfoFragmentState extends State<PersonalInfoFragment> {
         onSaved: (value) {
           if (mounted) {
             setState(() {
-              user.lastName = value!;
+              widget.user.lastName = value!;
             });
           }
         },
@@ -232,7 +193,7 @@ class _PersonalInfoFragmentState extends State<PersonalInfoFragment> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextFormField(
-        initialValue: user.title,
+        initialValue: widget.user.title,
         decoration: const InputDecoration(
           label: Text("Your Title"),
           border: OutlineInputBorder(),
@@ -244,7 +205,7 @@ class _PersonalInfoFragmentState extends State<PersonalInfoFragment> {
         onSaved: (value) {
           if (mounted) {
             setState(() {
-              user.title = value!;
+              widget.user.title = value!;
             });
           }
         },
@@ -257,7 +218,7 @@ class _PersonalInfoFragmentState extends State<PersonalInfoFragment> {
       padding: const EdgeInsets.all(8.0),
       child: TextButton(
           style: ButtonStyle(
-            fixedSize: MaterialStateProperty.all(const Size(70, 40)),
+            fixedSize: MaterialStateProperty.all(const Size(90, 40)),
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18.0),
@@ -281,7 +242,7 @@ class _PersonalInfoFragmentState extends State<PersonalInfoFragment> {
       padding: const EdgeInsets.all(8.0),
       child: TextButton(
           style: ButtonStyle(
-            fixedSize: MaterialStateProperty.all(const Size(70, 40)),
+            fixedSize: MaterialStateProperty.all(const Size(90, 40)),
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18.0),
@@ -305,7 +266,7 @@ class _PersonalInfoFragmentState extends State<PersonalInfoFragment> {
 
   Future callSaveUserApi() async {
     Map<String, dynamic>? responseData =
-        await MainApiRepo.userApiRepo.updateUser(user);
+        await MainApiRepo.userApiRepo.updateUser(widget.user);
     String stringToShow = "";
     if (responseData == null || responseData.containsKey("errorMessage")) {
       stringToShow = "Something went wrong, please try again";

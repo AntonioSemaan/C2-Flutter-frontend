@@ -108,12 +108,13 @@ class APIManager {
 
       headers ??= {
         "Accept": "application/json; charset=utf-8",
+        "Content-Type": "application/json"
       };
 
       try {
         final uri = Uri.https(gDomain, url, params);
         http.Response response = await _httpClient
-            .put(uri, headers: headers, body: body)
+            .put(uri, headers: headers, body: json.encode(body))
             .timeout(
                 const Duration(seconds: Constants.TIMEOUT_DURATION_SECONDS));
 

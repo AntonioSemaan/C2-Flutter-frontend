@@ -1,7 +1,7 @@
 import 'package:c2_antonio_hany/data_classes/provider_classes.dart';
 import 'package:c2_antonio_hany/data_classes/user_skill.dart';
-import 'package:c2_antonio_hany/fragments/profile_page/profile_page_panel_wrapper.dart';
-import 'package:c2_antonio_hany/fragments/profile_page/skills_fragment.dart';
+import 'package:c2_antonio_hany/fragments/profile_page/wrappers/profile_page_panel_wrapper.dart';
+import 'package:c2_antonio_hany/fragments/profile_page/skills/skills_fragment.dart';
 import 'package:c2_antonio_hany/globals.dart';
 import 'package:c2_antonio_hany/managers/main_api_repo.dart';
 import 'package:flutter/material.dart';

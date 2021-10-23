@@ -25,7 +25,7 @@ class _DashboardTimelinePanelState extends State<DashboardTimelinePanel> {
       child: FutureBuilder(
           future: MainApiRepo.jobApiRepo.fetchByEnum(
               context.watch<DashboardJobEnumWrapper>().value,
-              "ON SITE",
+              "",
               context.read<JobFiltersSorts>()),
           builder: (context, snapshot) {
             if (snapshot.hasError) {
@@ -56,15 +56,19 @@ class _DashboardTimelinePanelState extends State<DashboardTimelinePanel> {
                 List<Job> jobs = (responseData["data"] as List<dynamic>)
                     .map((e) => Job.fromJson(e))
                     .toList();
-                return Expanded(
-                  child: ListView.builder(
+                if (jobs.isNotEmpty) {
+                  return ListView.builder(
                       itemCount: jobs.length,
                       itemBuilder: (context, index) {
                         print(index);
                         print(jobs[index]);
                         return JobDisplayFragment(job: jobs[index]);
-                      }),
-                );
+                      });
+                } else {
+                  return const Center(
+                    child: Text("No jobs to show"),
+                  );
+                }
               }
             } else {
               return const Center(

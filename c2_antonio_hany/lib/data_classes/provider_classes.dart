@@ -1,3 +1,4 @@
+import 'package:c2_antonio_hany/data_classes/job.dart';
 import 'package:c2_antonio_hany/data_classes/user_education.dart';
 import 'package:c2_antonio_hany/data_classes/user_experience.dart';
 import 'package:c2_antonio_hany/enums.dart';
@@ -43,6 +44,17 @@ class ExperienceListWrapper extends ChangeNotifier {
 
   set value(List<UserExperience> experiences) {
     _userExperiences = experiences;
+    notifyListeners();
+  }
+}
+
+class JobsListWrapper extends ChangeNotifier {
+  List<Job> _userJobs = [];
+
+  List<Job> get value => _userJobs;
+
+  set value(List<Job> jobs) {
+    _userJobs = jobs;
     notifyListeners();
   }
 }

@@ -43,7 +43,9 @@ class User {
   }
 
   User.fromJson(data)
-      : userId = data["id"],
+      : userId = data["id"].runtimeType == String
+            ? int.parse(data["id"])
+            : data["id"],
         username = data["username"],
         firstName = data["firstName"],
         lastName = data["lastName"],
@@ -51,7 +53,9 @@ class User {
         title = data["title"];
 
   User.fromJsonJob(data)
-      : userId = data["userId"],
+      : userId = data["userId"].runtimeType == String
+            ? int.parse(data["userId"])
+            : data["userId"],
         username = data["userUsername"],
         firstName = data["userFirstName"],
         lastName = data["userLastName"],

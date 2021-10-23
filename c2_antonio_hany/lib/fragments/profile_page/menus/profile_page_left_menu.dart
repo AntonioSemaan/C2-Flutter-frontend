@@ -15,6 +15,7 @@ class ProfilePageLeftMenu extends StatefulWidget {
 class _ProfilePageLeftMenuState extends State<ProfilePageLeftMenu> {
   Map<ProfilePageView, String> panelsMap = {
     ProfilePageView.PERSONAL_INFO: "Personal Information",
+    ProfilePageView.POSTS: "Posts",
     ProfilePageView.EDUCATION: "Education",
     ProfilePageView.EXPERIENCE: "Experience",
     ProfilePageView.SKILLS: "Skills"

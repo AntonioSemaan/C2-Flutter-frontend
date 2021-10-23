@@ -1,7 +1,7 @@
 import 'package:c2_antonio_hany/data_classes/provider_classes.dart';
 import 'package:c2_antonio_hany/data_classes/user_education.dart';
-import 'package:c2_antonio_hany/fragments/profile_page/education_fragment.dart';
-import 'package:c2_antonio_hany/fragments/profile_page/profile_page_panel_wrapper.dart';
+import 'package:c2_antonio_hany/fragments/profile_page/education/education_fragment.dart';
+import 'package:c2_antonio_hany/fragments/profile_page/wrappers/profile_page_panel_wrapper.dart';
 import 'package:c2_antonio_hany/globals.dart';
 import 'package:c2_antonio_hany/managers/main_api_repo.dart';
 import 'package:flutter/material.dart';
@@ -80,7 +80,7 @@ class _EducationPanelState extends State<EducationPanel> {
                       child: TextButton(
                           style: ButtonStyle(
                             fixedSize:
-                                MaterialStateProperty.all(const Size(70, 40)),
+                                MaterialStateProperty.all(const Size(90, 40)),
                             shape: MaterialStateProperty.all<
                                     RoundedRectangleBorder>(
                                 RoundedRectangleBorder(

@@ -1,5 +1,6 @@
 import 'package:c2_antonio_hany/data_classes/provider_classes.dart';
 import 'package:c2_antonio_hany/enums.dart';
+import 'package:c2_antonio_hany/pages/dashboard_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -83,6 +84,18 @@ class __DefaultSecondToolbarInternalState
                     onPressed: () {
                       context.read<DashboardJobEnumWrapper>().value =
                           JobEnum.JOB_OFFER;
+                      var name = ModalRoute.of(context)!.settings.name;
+                      if (name != "DashboardPage") {
+                        Navigator.of(context).popUntil(
+                            (route) => route.settings.name == "DashboardPage");
+                      }
+                      name = ModalRoute.of(context)!.settings.name;
+                      if (name != "DashboardPage") {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            settings:
+                                const RouteSettings(name: "DashboardPage"),
+                            builder: (context) => DashboardPage()));
+                      }
                     },
                     child: const Text(
                       "Job Offers",
@@ -116,6 +129,18 @@ class __DefaultSecondToolbarInternalState
                     onPressed: () {
                       context.read<DashboardJobEnumWrapper>().value =
                           JobEnum.ALL;
+                      var name = ModalRoute.of(context)!.settings.name;
+                      if (name != "DashboardPage") {
+                        Navigator.of(context).popUntil(
+                            (route) => route.settings.name == "DashboardPage");
+                      }
+                      name = ModalRoute.of(context)!.settings.name;
+                      if (name != "DashboardPage") {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            settings:
+                                const RouteSettings(name: "DashboardPage"),
+                            builder: (context) => DashboardPage()));
+                      }
                     },
                     child: const Text(
                       "All",
@@ -149,6 +174,18 @@ class __DefaultSecondToolbarInternalState
                     onPressed: () {
                       context.read<DashboardJobEnumWrapper>().value =
                           JobEnum.JOB_REQUEST;
+                      var name = ModalRoute.of(context)!.settings.name;
+                      if (name != "DashboardPage") {
+                        Navigator.of(context).popUntil(
+                            (route) => route.settings.name == "DashboardPage");
+                      }
+                      name = ModalRoute.of(context)!.settings.name;
+                      if (name != "DashboardPage") {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            settings:
+                                const RouteSettings(name: "DashboardPage"),
+                            builder: (context) => DashboardPage()));
+                      }
                     },
                     child: const Text(
                       "Job Requests",

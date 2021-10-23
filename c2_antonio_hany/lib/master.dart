@@ -56,7 +56,9 @@ class Master extends StatefulWidget {
             ? null
             : () {
                 Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => DashboardPage()));
+                    MaterialPageRoute(
+                      settings: const RouteSettings(name: "DashboardPage"),
+                      builder: (context) => DashboardPage()));
               },
         child: const Text("Dashboard"),
       ),

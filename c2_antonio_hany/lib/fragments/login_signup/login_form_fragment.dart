@@ -69,10 +69,10 @@ class _LogInFormFragmentState extends State<LogInFormFragment> {
           validator: (value) =>
               value!.length > 2 ? null : "Enter at least 3 characters",
           onSaved: (value) {
-            if(mounted) {
+            if (mounted) {
               setState(() {
-              _password = value!;
-            });
+                _password = value!;
+              });
             }
           }),
     );
@@ -122,7 +122,9 @@ class _LogInFormFragmentState extends State<LogInFormFragment> {
     } else {
       gLoggedUser = User.fromJson(responseData["data"]);
       Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => DashboardPage()),
+          MaterialPageRoute(
+              settings: const RouteSettings(name: "DashboardPage"),
+              builder: (context) => DashboardPage()),
           (route) => false);
     }
   }

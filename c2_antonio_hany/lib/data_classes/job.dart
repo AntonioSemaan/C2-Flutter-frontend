@@ -33,7 +33,9 @@ class Job {
       this.creationDate});
 
   Job.fromJson(Map<String, dynamic> data) {
-    id = data["jobId"];
+    id = data["jobId"].runtimeType == String
+        ? int.parse(data["jobId"])
+        : data["jobId"];
     jobEnum = JobEnumExtension.fromInt(data["jobEnum"]);
 
     Map<String, dynamic> userData = {};

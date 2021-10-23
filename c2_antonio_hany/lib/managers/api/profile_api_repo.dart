@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:c2_antonio_hany/data_classes/user_skill.dart';
 import 'package:c2_antonio_hany/data_classes/user_experience.dart';
 import 'package:c2_antonio_hany/data_classes/user_education.dart';
@@ -74,8 +76,7 @@ class ProfileApiRepo implements IProfileApiRepo {
       int userId, List<UserExperience> experiences) async {
     Map<String, String> params = {"userId": userId.toString()};
 
-    List<Map<String, dynamic>> bodyList =
-        experiences.map((e) => e.toJsonMap()).toList();
+    List<dynamic> bodyList = experiences.map((e) => e.toJsonMap()).toList();
 
     Map<String, dynamic> body = {"experience": bodyList};
 
@@ -96,6 +97,7 @@ class ProfileApiRepo implements IProfileApiRepo {
 
     List<Map<String, dynamic>> bodyList =
         skills.map((e) => e.toJsonMap()).toList();
+
 
     Map<String, dynamic> body = {"skills": bodyList};
 

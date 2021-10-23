@@ -1,5 +1,5 @@
 import 'package:c2_antonio_hany/enums.dart';
-import 'package:c2_antonio_hany/fragments/custom_expansion_panel.dart';
+import 'package:c2_antonio_hany/fragments/elements/custom_expansion_panel.dart';
 import 'package:c2_antonio_hany/fragments/login_signup/login_form_fragment.dart';
 import 'package:c2_antonio_hany/fragments/login_signup/signup_form_fragment.dart';
 import 'package:c2_antonio_hany/master.dart';

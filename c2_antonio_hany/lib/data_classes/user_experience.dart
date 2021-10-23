@@ -22,7 +22,8 @@ class UserExperience {
 
   UserExperience.fromJson(data) {
     if (data["id"] != null) {
-      id = data["id"];
+      id =
+          data["id"].runtimeType == String ? int.parse(data["id"]) : data["id"];
     }
     if (data["company"] != null) {
       company = data["company"];

@@ -1,7 +1,8 @@
 import 'package:c2_antonio_hany/data_classes/provider_classes.dart';
 import 'package:c2_antonio_hany/data_classes/user_education.dart';
 import 'package:c2_antonio_hany/fragments/dashboard/dashboard_panel_wrapper.dart';
-import 'package:c2_antonio_hany/fragments/profile_page/profile_page_fragment_wrapper.dart';
+import 'package:c2_antonio_hany/fragments/elements/floating_delete_icon_button.dart';
+import 'package:c2_antonio_hany/fragments/profile_page/wrappers/profile_page_fragment_wrapper.dart';
 import 'package:c2_antonio_hany/globals.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -19,6 +20,11 @@ class EducationFragment extends StatefulWidget {
 class _EducationFragmentState extends State<EducationFragment> {
   final formKey = GlobalKey<FormState>();
   late bool inEditMode;
+  TextEditingController nameController = TextEditingController();
+  TextEditingController degreeController = TextEditingController();
+  TextEditingController domainController = TextEditingController();
+  TextEditingController dateFromController = TextEditingController();
+  TextEditingController dateToController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -27,30 +33,50 @@ class _EducationFragmentState extends State<EducationFragment> {
     return ProfilePageFragmentWrapper(
         child: Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Container(
-        width: 300,
-        child: Form(
-          key: formKey,
-          child: Column(
-            children: [
-              buildNameField(),
-              buildDegreeField(),
-              buildDomainField(),
-              buildDateFromField(),
-              buildDateToField(),
-              Visibility(
-                visible: inEditMode,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+      child: Stack(
+        fit: StackFit.passthrough,
+        children: [
+          inEditMode
+              ? FloatingDeleteIconButton(onPressed: () {
+                  context
+                      .read<EducationListWrapper>()
+                      .value
+                      .removeAt(widget.index);
+                })
+              : Container(),
+          Padding(
+            padding: const EdgeInsets.only(
+              top: 25.0,
+              right: 25.0,
+              left: 25.0,
+            ),
+            child: Container(
+              width: 300,
+              child: Form(
+                key: formKey,
+                child: Column(
                   children: [
-                    buildRestore(),
-                    buildSubmit(),
+                    buildNameField(),
+                    buildDegreeField(),
+                    buildDomainField(),
+                    buildDateFromField(),
+                    buildDateToField(),
+                    Visibility(
+                      visible: inEditMode,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          buildRestore(),
+                          buildSubmit(),
+                        ],
+                      ),
+                    )
                   ],
                 ),
-              )
-            ],
+              ),
+            ),
           ),
-        ),
+        ],
       ),
     ));
   }
@@ -59,8 +85,9 @@ class _EducationFragmentState extends State<EducationFragment> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextFormField(
-        initialValue:
-            context.read<EducationListWrapper>().value[widget.index].name,
+        controller: nameController
+          ..text =
+              context.read<EducationListWrapper>().value[widget.index].name!,
         decoration: const InputDecoration(
           label: Text("Name"),
           border: OutlineInputBorder(),
@@ -85,8 +112,9 @@ class _EducationFragmentState extends State<EducationFragment> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextFormField(
-        initialValue:
-            context.read<EducationListWrapper>().value[widget.index].degree,
+        controller: degreeController
+          ..text =
+              context.read<EducationListWrapper>().value[widget.index].degree!,
         decoration: const InputDecoration(
           label: Text("Degree"),
           border: OutlineInputBorder(),
@@ -111,8 +139,9 @@ class _EducationFragmentState extends State<EducationFragment> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextFormField(
-        initialValue:
-            context.read<EducationListWrapper>().value[widget.index].domain,
+        controller: domainController
+          ..text =
+              context.read<EducationListWrapper>().value[widget.index].domain!,
         decoration: const InputDecoration(
           label: Text("Domain"),
           border: OutlineInputBorder(),
@@ -137,8 +166,11 @@ class _EducationFragmentState extends State<EducationFragment> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextFormField(
-        initialValue: gNormalFormat.format(
-            context.read<EducationListWrapper>().value[widget.index].dateFrom!),
+        controller: dateFromController
+          ..text = gNormalFormat.format(context
+              .read<EducationListWrapper>()
+              .value[widget.index]
+              .dateFrom!),
         decoration: const InputDecoration(
             label: Text("Date From"),
             border: OutlineInputBorder(),
@@ -171,8 +203,9 @@ class _EducationFragmentState extends State<EducationFragment> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextFormField(
-        initialValue: gNormalFormat.format(
-            context.read<EducationListWrapper>().value[widget.index].dateTo!),
+        controller: dateToController
+          ..text = gNormalFormat.format(
+              context.read<EducationListWrapper>().value[widget.index].dateTo!),
         decoration: const InputDecoration(
             label: Text("Date To"),
             border: OutlineInputBorder(),
@@ -207,7 +240,7 @@ class _EducationFragmentState extends State<EducationFragment> {
       padding: const EdgeInsets.all(8.0),
       child: TextButton(
           style: ButtonStyle(
-            fixedSize: MaterialStateProperty.all(const Size(70, 40)),
+            fixedSize: MaterialStateProperty.all(const Size(90, 40)),
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18.0),
@@ -219,7 +252,16 @@ class _EducationFragmentState extends State<EducationFragment> {
           ),
           onPressed: () {
             if (mounted) {
-              setState(() {});
+              UserEducation education =
+                  context.read<EducationListWrapper>().value[widget.index];
+              setState(() {
+                nameController.text = education.name!;
+                degreeController.text = education.degree!;
+                domainController.text = education.domain!;
+                dateFromController.text =
+                    gNormalFormat.format(education.dateFrom!);
+                dateToController.text = gNormalFormat.format(education.dateTo!);
+              });
             }
           },
           child: const Text("Restore")),
@@ -231,7 +273,7 @@ class _EducationFragmentState extends State<EducationFragment> {
       padding: const EdgeInsets.all(8.0),
       child: TextButton(
           style: ButtonStyle(
-            fixedSize: MaterialStateProperty.all(const Size(70, 40)),
+            fixedSize: MaterialStateProperty.all(const Size(90, 40)),
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18.0),

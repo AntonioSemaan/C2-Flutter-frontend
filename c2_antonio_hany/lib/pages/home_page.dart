@@ -66,7 +66,9 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin<HomePage> {
   void afterFirstLayout(BuildContext context) {
     if (gLoggedUser != null) {
       Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => DashboardPage()),
+          MaterialPageRoute(
+              settings: const RouteSettings(name: "DashboardPage"),
+              builder: (context) => DashboardPage()),
           (route) => false);
     }
   }

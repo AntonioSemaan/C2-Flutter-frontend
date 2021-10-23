@@ -1,7 +1,7 @@
 import 'package:c2_antonio_hany/data_classes/provider_classes.dart';
 import 'package:c2_antonio_hany/enums.dart';
-import 'package:c2_antonio_hany/fragments/profile_page/profile_page_left_menu.dart';
-import 'package:c2_antonio_hany/fragments/profile_page/profile_page_right_panel.dart';
+import 'package:c2_antonio_hany/fragments/profile_page/menus/profile_page_left_menu.dart';
+import 'package:c2_antonio_hany/fragments/profile_page/menus/profile_page_right_panel.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
