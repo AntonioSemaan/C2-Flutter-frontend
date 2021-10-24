@@ -175,7 +175,6 @@ class APIManager {
 
   Map<String, dynamic> analyzeResponseBodyBytes(Uint8List list) {
     String string = String.fromCharCodes(list);
-    print(string);
 
     Map<String, dynamic> jsonMap = json.decode(string) as Map<String, dynamic>;
     Map<String, dynamic> toReturn2 = convertToMap(jsonMap);

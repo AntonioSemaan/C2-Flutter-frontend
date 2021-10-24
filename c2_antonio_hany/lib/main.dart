@@ -5,7 +5,8 @@ import 'package:flutter/widgets.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  FirebaseApp app = await Firebase.initializeApp();
+  print("initialized: " + app.toString());
   runApp(const MyApp());
 }
 

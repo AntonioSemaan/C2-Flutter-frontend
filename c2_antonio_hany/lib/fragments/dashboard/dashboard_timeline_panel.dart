@@ -60,8 +60,6 @@ class _DashboardTimelinePanelState extends State<DashboardTimelinePanel> {
                   return ListView.builder(
                       itemCount: jobs.length,
                       itemBuilder: (context, index) {
-                        print(index);
-                        print(jobs[index]);
                         return JobDisplayFragment(job: jobs[index]);
                       });
                 } else {
