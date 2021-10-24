@@ -1,7 +1,7 @@
+import 'package:c2_antonio_hany/cloned_package/chat_data.dart';
+import 'package:c2_antonio_hany/cloned_package/chat_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_chat/chatData.dart';
-import 'package:flutter_chat/chatWidget.dart';
 
 class ChatWelcomeScreen extends StatefulWidget {
   static const String id = "welcome_screen";
