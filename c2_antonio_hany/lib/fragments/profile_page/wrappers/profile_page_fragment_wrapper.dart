@@ -4,7 +4,10 @@ import 'package:flutter/widgets.dart';
 class ProfilePageFragmentWrapper extends StatefulWidget {
   Widget child;
   double? desiredHeight;
-  ProfilePageFragmentWrapper({Key? key, required this.child,this.desiredHeight}) : super(key: key);
+  double? desiredWidth;
+  ProfilePageFragmentWrapper(
+      {Key? key, required this.child, this.desiredHeight, this.desiredWidth})
+      : super(key: key);
 
   @override
   _ProfilePageFragmentWrapperState createState() =>
@@ -21,7 +24,8 @@ class _ProfilePageFragmentWrapperState
       padding: const EdgeInsets.all(8.0),
       child: Container(
         margin: const EdgeInsets.only(right: 40, left: 40, top: 10, bottom: 10),
-        height: widget.desiredHeight?? desiredHeight,
+        width: widget.desiredWidth,
+        height: widget.desiredHeight ?? desiredHeight,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: Colors.white,

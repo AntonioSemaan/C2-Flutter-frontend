@@ -1,3 +1,4 @@
+import 'package:c2_antonio_hany/data_classes/user.dart';
 import 'package:c2_antonio_hany/data_classes/user_education.dart';
 import 'package:c2_antonio_hany/data_classes/user_experience.dart';
 import 'package:c2_antonio_hany/data_classes/user_skill.dart';
@@ -17,4 +18,6 @@ abstract class IProfileApiRepo {
 
   Future<Map<String, dynamic>?> updateUserSkills(
       int userId, List<UserSkill> skills);
+      
+  Future<Map<String, dynamic>?> updateUser(User user);
 }

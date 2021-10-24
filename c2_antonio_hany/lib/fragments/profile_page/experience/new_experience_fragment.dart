@@ -32,39 +32,41 @@ class _NewExperienceFragmentState extends State<NewExperienceFragment> {
   @override
   Widget build(BuildContext context) {
     return ProfilePageFragmentWrapper(
+        desiredHeight: 300,
         child: Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Padding(
-        padding: const EdgeInsets.only(
-          top: 25.0,
-          right: 25.0,
-          left: 25.0,
-        ),
-        child: Container(
-          width: 300,
-          child: Form(
-            key: formKey,
-            child: Column(
-              children: [
-                buildCompanyField(),
-                buildTitleField(),
-                buildDescriptionField(),
-                buildDateFromField(),
-                buildDateToField(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+          padding: const EdgeInsets.all(8.0),
+          child: Padding(
+            padding: const EdgeInsets.only(
+              top: 25.0,
+              right: 25.0,
+              left: 25.0,
+            ),
+            child: Container(
+              width: 600,
+              child: Form(
+                key: formKey,
+                child: Column(
                   children: [
-                    buildRestore(),
-                    buildSubmit(),
+                    buildCompanyField(),
+                    buildTitleField(),
+                    buildDescriptionField(),
+                    buildDateFromField(),
+                    buildDateToField(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        buildRestore(),
+                        buildSubmit(),
+                      ],
+                    )
                   ],
-                )
-              ],
+                ),
+              ),
             ),
           ),
-        ),
-      ),
-    ));
+        ));
   }
+
   Widget buildCompanyField() {
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -280,12 +282,9 @@ class _NewExperienceFragmentState extends State<NewExperienceFragment> {
                       style: Theme.of(context).textTheme.headline4),
                   backgroundColor: const Color.fromRGBO(0, 133, 254, 1.0),
                 ));
-              }
-              
-              Navigator.pop(context);
 
-              context.read<ProfilePageViewWrapper>().value =
-                  context.read<ProfilePageViewWrapper>().value;
+                Navigator.pop(context);
+              }
             }
           },
           child: const Text("Save")),

@@ -33,6 +33,8 @@ class APIManager {
       } catch (ex) {
         print(ex);
       }
+    } else {
+      return {"errorMessage": "You are not Connected to the internet"};
     }
   }
 
@@ -61,6 +63,8 @@ class APIManager {
       } catch (ex) {
         print(ex);
       }
+    } else {
+      return {"errorMessage": "You are not Connected to the internet"};
     }
   }
 
@@ -98,6 +102,8 @@ class APIManager {
       } catch (ex) {
         print(ex);
       }
+    } else {
+      return {"errorMessage": "You are not Connected to the internet"};
     }
   }
 
@@ -124,6 +130,8 @@ class APIManager {
       } catch (ex) {
         print(ex);
       }
+    } else {
+      return {"errorMessage": "You are not Connected to the internet"};
     }
   }
 
@@ -153,6 +161,8 @@ class APIManager {
       } catch (ex) {
         print(ex);
       }
+    } else {
+      return {"errorMessage": "You are not Connected to the internet"};
     }
   }
 

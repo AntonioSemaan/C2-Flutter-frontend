@@ -47,17 +47,17 @@ class _NewPostFragmentState extends State<NewPostFragment> {
           left: 25.0,
         ),
         child: Container(
-          width: 300,
+          width: 600,
           child: Form(
             key: formKey,
-            child: Column(
+            child: ListView(
               children: [
                 Row(
-                  children: [buildJobEnumField(), buildJobTypeField()],
+                  children: [buildJobEnumField(), buildJobEnvironmentField()],
                 ),
                 Row(
                   children: [
-                    buildJobEnvironmentField(),
+                    buildJobTypeField(),
                     buildJobExperienceField(),
                   ],
                 ),
@@ -85,25 +85,34 @@ class _NewPostFragmentState extends State<NewPostFragment> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
+        width: 250,
+        height: 140,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             border: Border.all(color: const Color.fromRGBO(0, 133, 254, 1.0))),
         child: Column(
           children: [
-            Text("Job:", style: Theme.of(context).textTheme.headline5),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text("Job:", style: Theme.of(context).textTheme.headline5),
+            ),
             RadioListTile<JobEnum>(
                 title: Text(JobEnum.JOB_OFFER.stringValue),
                 value: JobEnum.JOB_OFFER,
                 groupValue: _jobEnum,
                 onChanged: (value) {
-                  _jobEnum = value;
+                  setState(() {
+                    _jobEnum = value;
+                  });
                 }),
             RadioListTile<JobEnum>(
                 title: Text(JobEnum.JOB_REQUEST.stringValue),
                 value: JobEnum.JOB_REQUEST,
                 groupValue: _jobEnum,
                 onChanged: (value) {
-                  _jobEnum = value;
+                  setState(() {
+                    _jobEnum = value;
+                  });
                 }),
           ],
         ),
@@ -115,39 +124,53 @@ class _NewPostFragmentState extends State<NewPostFragment> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
+        width: 250,
+        height: 240,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             border: Border.all(color: const Color.fromRGBO(0, 133, 254, 1.0))),
         child: Column(
           children: [
-            Text("Type:", style: Theme.of(context).textTheme.headline5),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child:
+                  Text("Type:", style: Theme.of(context).textTheme.headline5),
+            ),
             RadioListTile<JobType>(
                 title: Text(JobType.INTERNSHIP.stringValue),
                 value: JobType.INTERNSHIP,
                 groupValue: _jobType,
                 onChanged: (value) {
-                  _jobType = value;
+                  setState(() {
+                    _jobType = value;
+                  });
                 }),
             RadioListTile<JobType>(
                 title: Text(JobType.PART_TIME.stringValue),
                 value: JobType.PART_TIME,
                 groupValue: _jobType,
                 onChanged: (value) {
-                  _jobType = value;
+                  setState(() {
+                    _jobType = value;
+                  });
                 }),
             RadioListTile<JobType>(
                 title: Text(JobType.FULL_TIME.stringValue),
                 value: JobType.FULL_TIME,
                 groupValue: _jobType,
                 onChanged: (value) {
-                  _jobType = value;
+                  setState(() {
+                    _jobType = value;
+                  });
                 }),
             RadioListTile<JobType>(
                 title: Text(JobType.FREELANCE.stringValue),
                 value: JobType.FREELANCE,
                 groupValue: _jobType,
                 onChanged: (value) {
-                  _jobType = value;
+                  setState(() {
+                    _jobType = value;
+                  });
                 }),
           ],
         ),
@@ -159,32 +182,44 @@ class _NewPostFragmentState extends State<NewPostFragment> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
+        width: 250,
+        height: 190,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             border: Border.all(color: const Color.fromRGBO(0, 133, 254, 1.0))),
         child: Column(
           children: [
-            Text("Experience:", style: Theme.of(context).textTheme.headline5),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text("Experience:",
+                  style: Theme.of(context).textTheme.headline5),
+            ),
             RadioListTile<JobExperience>(
                 title: Text(JobExperience.JUNIOR.stringValue),
                 value: JobExperience.JUNIOR,
                 groupValue: _jobExperience,
                 onChanged: (value) {
-                  _jobExperience = value;
+                  setState(() {
+                    _jobExperience = value;
+                  });
                 }),
             RadioListTile<JobExperience>(
                 title: Text(JobExperience.MID.stringValue),
                 value: JobExperience.MID,
                 groupValue: _jobExperience,
                 onChanged: (value) {
-                  _jobExperience = value;
+                  setState(() {
+                    _jobExperience = value;
+                  });
                 }),
             RadioListTile<JobExperience>(
                 title: Text(JobExperience.SENIOR.stringValue),
                 value: JobExperience.SENIOR,
                 groupValue: _jobExperience,
                 onChanged: (value) {
-                  _jobExperience = value;
+                  setState(() {
+                    _jobExperience = value;
+                  });
                 }),
           ],
         ),
@@ -196,25 +231,35 @@ class _NewPostFragmentState extends State<NewPostFragment> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
+        width: 250,
+        height: 140,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             border: Border.all(color: const Color.fromRGBO(0, 133, 254, 1.0))),
         child: Column(
           children: [
-            Text("Environment:", style: Theme.of(context).textTheme.headline5),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text("Environment:",
+                  style: Theme.of(context).textTheme.headline5),
+            ),
             RadioListTile<JobEnvironment>(
                 title: Text(JobEnvironment.ONSITE.stringValue),
                 value: JobEnvironment.ONSITE,
                 groupValue: _jobEnvironment,
                 onChanged: (value) {
-                  _jobEnvironment = value;
+                  setState(() {
+                    _jobEnvironment = value;
+                  });
                 }),
             RadioListTile<JobEnvironment>(
                 title: Text(JobEnvironment.REMOTE.stringValue),
                 value: JobEnvironment.REMOTE,
                 groupValue: _jobEnvironment,
                 onChanged: (value) {
-                  _jobEnvironment = value;
+                  setState(() {
+                    _jobEnvironment = value;
+                  });
                 }),
           ],
         ),
@@ -280,7 +325,7 @@ class _NewPostFragmentState extends State<NewPostFragment> {
         autovalidateMode: AutovalidateMode.disabled,
         validator: (value) {
           try {
-            if (value == null || value.isNotEmpty) {
+            if (value == null || value.isEmpty) {
               return "Salary from cannot be empty";
             }
             double.parse(value);
@@ -312,7 +357,7 @@ class _NewPostFragmentState extends State<NewPostFragment> {
         autovalidateMode: AutovalidateMode.disabled,
         validator: (value) {
           try {
-            if (value == null || value.isNotEmpty) {
+            if (value == null || value.isEmpty) {
               return "Salary to cannot be empty";
             }
 
@@ -459,12 +504,9 @@ class _NewPostFragmentState extends State<NewPostFragment> {
                         style: Theme.of(context).textTheme.headline4),
                     backgroundColor: const Color.fromRGBO(0, 133, 254, 1.0),
                   ));
+
+                  Navigator.pop(context);
                 }
-
-                Navigator.pop(context);
-
-                context.read<ProfilePageViewWrapper>().value =
-                    context.read<ProfilePageViewWrapper>().value;
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                   content: Text(result),

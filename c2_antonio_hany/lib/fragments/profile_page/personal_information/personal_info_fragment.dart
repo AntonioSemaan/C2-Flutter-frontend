@@ -75,7 +75,7 @@ class _PersonalInfoFragmentState extends State<PersonalInfoFragment> {
           label: Text("Username"),
           border: OutlineInputBorder(),
         ),
-        enabled: inEditMode,
+        enabled: false,
         autovalidateMode: AutovalidateMode.disabled,
         validator: (value) =>
             value!.length > 2 ? null : "Enter at least 3 characters",
@@ -266,7 +266,7 @@ class _PersonalInfoFragmentState extends State<PersonalInfoFragment> {
 
   Future callSaveUserApi() async {
     Map<String, dynamic>? responseData =
-        await MainApiRepo.userApiRepo.updateUser(widget.user);
+        await MainApiRepo.profileApiRepo.updateUser(widget.user);
     String stringToShow = "";
     if (responseData == null || responseData.containsKey("errorMessage")) {
       stringToShow = "Something went wrong, please try again";

@@ -20,7 +20,9 @@ class _DefaultSecondToolbarState extends State<DefaultSecondToolbar> {
     return MultiProvider(
         providers: [
           ChangeNotifierProvider<DashboardJobEnumWrapper>(
-              create: (_) => DashboardJobEnumWrapper())
+              create: (_) => DashboardJobEnumWrapper()),
+          ChangeNotifierProvider<SearchTextWrapper>(
+              create: (_) => SearchTextWrapper()),
         ],
         child: _DefaultSecondToolbarInternal(
           child: widget.child,
@@ -55,143 +57,179 @@ class __DefaultSecondToolbarInternalState
                 color: const Color.fromRGBO(0, 133, 254, 1.0),
               ),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  TextButton(
-                    style: context.watch<DashboardJobEnumWrapper>().value !=
-                            JobEnum.JOB_OFFER
-                        ? ButtonStyle(
-                            shape: MaterialStateProperty.all<
-                                    RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(18.0),
-                                    side: const BorderSide(
-                                        color:
-                                            Color.fromRGBO(0, 133, 254, 1.0)))),
-                            foregroundColor:
-                                MaterialStateProperty.all(Colors.white),
-                            backgroundColor: MaterialStateProperty.all(
-                                const Color.fromRGBO(0, 133, 254, 1.0)),
-                            textStyle: MaterialStateProperty.all(
-                                Theme.of(context).textTheme.headline4),
-                          )
-                        : OutlinedButton.styleFrom(
-                            primary: Colors.white,
-                            side:
-                                const BorderSide(color: Colors.white, width: 1),
-                            fixedSize: const Size(100, 40),
+                  const SizedBox(width: 200, height: 40, child: null),
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        TextButton(
+                          style: context
+                                      .watch<DashboardJobEnumWrapper>()
+                                      .value !=
+                                  JobEnum.JOB_OFFER
+                              ? ButtonStyle(
+                                  shape: MaterialStateProperty.all<
+                                          RoundedRectangleBorder>(
+                                      RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(18.0),
+                                          side: const BorderSide(
+                                              color: Color.fromRGBO(
+                                                  0, 133, 254, 1.0)))),
+                                  foregroundColor:
+                                      MaterialStateProperty.all(Colors.white),
+                                  backgroundColor: MaterialStateProperty.all(
+                                      const Color.fromRGBO(0, 133, 254, 1.0)),
+                                  textStyle: MaterialStateProperty.all(
+                                      Theme.of(context).textTheme.headline4),
+                                )
+                              : OutlinedButton.styleFrom(
+                                  primary: Colors.white,
+                                  side: const BorderSide(
+                                      color: Colors.white, width: 1),
+                                  fixedSize: const Size(100, 40),
+                                ),
+                          onPressed: () {
+                            context.read<DashboardJobEnumWrapper>().value =
+                                JobEnum.JOB_OFFER;
+                            var name = ModalRoute.of(context)!.settings.name;
+                            if (name != "DashboardPage") {
+                              Navigator.of(context).popUntil((route) =>
+                                  route.settings.name == "DashboardPage");
+                            }
+                            name = ModalRoute.of(context)!.settings.name;
+                            if (name != "DashboardPage") {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  settings: const RouteSettings(
+                                      name: "DashboardPage"),
+                                  builder: (context) => DashboardPage()));
+                            }
+                          },
+                          child: const Text(
+                            "Job Offers",
+                            textAlign: TextAlign.center,
                           ),
-                    onPressed: () {
-                      context.read<DashboardJobEnumWrapper>().value =
-                          JobEnum.JOB_OFFER;
-                      var name = ModalRoute.of(context)!.settings.name;
-                      if (name != "DashboardPage") {
-                        Navigator.of(context).popUntil(
-                            (route) => route.settings.name == "DashboardPage");
-                      }
-                      name = ModalRoute.of(context)!.settings.name;
-                      if (name != "DashboardPage") {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            settings:
-                                const RouteSettings(name: "DashboardPage"),
-                            builder: (context) => DashboardPage()));
-                      }
-                    },
-                    child: const Text(
-                      "Job Offers",
-                      textAlign: TextAlign.center,
+                        ),
+                        TextButton(
+                          style: context
+                                      .watch<DashboardJobEnumWrapper>()
+                                      .value !=
+                                  JobEnum.ALL
+                              ? ButtonStyle(
+                                  shape: MaterialStateProperty.all<
+                                          RoundedRectangleBorder>(
+                                      RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(18.0),
+                                          side: const BorderSide(
+                                              color: Color.fromRGBO(
+                                                  0, 133, 254, 1.0)))),
+                                  foregroundColor:
+                                      MaterialStateProperty.all(Colors.white),
+                                  backgroundColor: MaterialStateProperty.all(
+                                      const Color.fromRGBO(0, 133, 254, 1.0)),
+                                  textStyle: MaterialStateProperty.all(
+                                      Theme.of(context).textTheme.headline4),
+                                )
+                              : OutlinedButton.styleFrom(
+                                  primary: Colors.white,
+                                  side: const BorderSide(
+                                      color: Colors.white, width: 1),
+                                  fixedSize: const Size(100, 40),
+                                ),
+                          onPressed: () {
+                            context.read<DashboardJobEnumWrapper>().value =
+                                JobEnum.ALL;
+                            var name = ModalRoute.of(context)!.settings.name;
+                            if (name != "DashboardPage") {
+                              Navigator.of(context).popUntil((route) =>
+                                  route.settings.name == "DashboardPage");
+                            }
+                            name = ModalRoute.of(context)!.settings.name;
+                            if (name != "DashboardPage") {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  settings: const RouteSettings(
+                                      name: "DashboardPage"),
+                                  builder: (context) => DashboardPage()));
+                            }
+                          },
+                          child: const Text(
+                            "All",
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                        TextButton(
+                          style: context
+                                      .watch<DashboardJobEnumWrapper>()
+                                      .value !=
+                                  JobEnum.JOB_REQUEST
+                              ? ButtonStyle(
+                                  shape: MaterialStateProperty.all<
+                                          RoundedRectangleBorder>(
+                                      RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(18.0),
+                                          side: const BorderSide(
+                                              color: Color.fromRGBO(
+                                                  0, 133, 254, 1.0)))),
+                                  foregroundColor:
+                                      MaterialStateProperty.all(Colors.white),
+                                  backgroundColor: MaterialStateProperty.all(
+                                      const Color.fromRGBO(0, 133, 254, 1.0)),
+                                  textStyle: MaterialStateProperty.all(
+                                      Theme.of(context).textTheme.headline4),
+                                )
+                              : OutlinedButton.styleFrom(
+                                  primary: Colors.white,
+                                  side: const BorderSide(
+                                      color: Colors.white, width: 1),
+                                  fixedSize: const Size(100, 40),
+                                ),
+                          onPressed: () {
+                            context.read<DashboardJobEnumWrapper>().value =
+                                JobEnum.JOB_REQUEST;
+                            var name = ModalRoute.of(context)!.settings.name;
+                            if (name != "DashboardPage") {
+                              Navigator.of(context).popUntil((route) =>
+                                  route.settings.name == "DashboardPage");
+                            }
+                            name = ModalRoute.of(context)!.settings.name;
+                            if (name != "DashboardPage") {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  settings: const RouteSettings(
+                                      name: "DashboardPage"),
+                                  builder: (context) => DashboardPage()));
+                            }
+                          },
+                          child: const Text(
+                            "Job Requests",
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  TextButton(
-                    style: context.watch<DashboardJobEnumWrapper>().value !=
-                            JobEnum.ALL
-                        ? ButtonStyle(
-                            shape: MaterialStateProperty.all<
-                                    RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(18.0),
-                                    side: const BorderSide(
-                                        color:
-                                            Color.fromRGBO(0, 133, 254, 1.0)))),
-                            foregroundColor:
-                                MaterialStateProperty.all(Colors.white),
-                            backgroundColor: MaterialStateProperty.all(
-                                const Color.fromRGBO(0, 133, 254, 1.0)),
-                            textStyle: MaterialStateProperty.all(
-                                Theme.of(context).textTheme.headline4),
-                          )
-                        : OutlinedButton.styleFrom(
-                            primary: Colors.white,
-                            side:
-                                const BorderSide(color: Colors.white, width: 1),
-                            fixedSize: const Size(100, 40),
-                          ),
-                    onPressed: () {
-                      context.read<DashboardJobEnumWrapper>().value =
-                          JobEnum.ALL;
-                      var name = ModalRoute.of(context)!.settings.name;
-                      if (name != "DashboardPage") {
-                        Navigator.of(context).popUntil(
-                            (route) => route.settings.name == "DashboardPage");
-                      }
-                      name = ModalRoute.of(context)!.settings.name;
-                      if (name != "DashboardPage") {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            settings:
-                                const RouteSettings(name: "DashboardPage"),
-                            builder: (context) => DashboardPage()));
-                      }
-                    },
-                    child: const Text(
-                      "All",
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  TextButton(
-                    style: context.watch<DashboardJobEnumWrapper>().value !=
-                            JobEnum.JOB_REQUEST
-                        ? ButtonStyle(
-                            shape: MaterialStateProperty.all<
-                                    RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(18.0),
-                                    side: const BorderSide(
-                                        color:
-                                            Color.fromRGBO(0, 133, 254, 1.0)))),
-                            foregroundColor:
-                                MaterialStateProperty.all(Colors.white),
-                            backgroundColor: MaterialStateProperty.all(
-                                const Color.fromRGBO(0, 133, 254, 1.0)),
-                            textStyle: MaterialStateProperty.all(
-                                Theme.of(context).textTheme.headline4),
-                          )
-                        : OutlinedButton.styleFrom(
-                            primary: Colors.white,
-                            side:
-                                const BorderSide(color: Colors.white, width: 1),
-                            fixedSize: const Size(100, 40),
-                          ),
-                    onPressed: () {
-                      context.read<DashboardJobEnumWrapper>().value =
-                          JobEnum.JOB_REQUEST;
-                      var name = ModalRoute.of(context)!.settings.name;
-                      if (name != "DashboardPage") {
-                        Navigator.of(context).popUntil(
-                            (route) => route.settings.name == "DashboardPage");
-                      }
-                      name = ModalRoute.of(context)!.settings.name;
-                      if (name != "DashboardPage") {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            settings:
-                                const RouteSettings(name: "DashboardPage"),
-                            builder: (context) => DashboardPage()));
-                      }
-                    },
-                    child: const Text(
-                      "Job Requests",
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
+                  SizedBox(
+                      width: 200,
+                      height: 40,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextField(
+                          decoration: InputDecoration(
+                              hintText: "Search",
+                              hintStyle: Theme.of(context).textTheme.subtitle2),
+                          style: Theme.of(context).textTheme.headline4,
+                          cursorColor: Colors.white,
+                          onSubmitted: (value) {
+                            context.read<DashboardJobEnumWrapper>().value =
+                                context.read<DashboardJobEnumWrapper>().value;
+                          },
+                          onChanged: (value) {
+                            context.read<SearchTextWrapper>().value = value;
+                          },
+                        ),
+                      )),
                 ],
               ),
             ),

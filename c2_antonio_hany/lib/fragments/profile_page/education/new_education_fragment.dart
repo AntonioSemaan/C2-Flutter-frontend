@@ -41,7 +41,7 @@ class _NewEducationFragmentState extends State<NewEducationFragment> {
           left: 25.0,
         ),
         child: Container(
-          width: 300,
+          width: 600,
           child: Form(
             key: formKey,
             child: Column(
@@ -281,12 +281,9 @@ class _NewEducationFragmentState extends State<NewEducationFragment> {
                       style: Theme.of(context).textTheme.headline4),
                   backgroundColor: const Color.fromRGBO(0, 133, 254, 1.0),
                 ));
+
+                Navigator.pop(context);
               }
-
-              Navigator.pop(context);
-
-              context.read<ProfilePageViewWrapper>().value =
-                  context.read<ProfilePageViewWrapper>().value;
             }
           },
           child: const Text("Save")),

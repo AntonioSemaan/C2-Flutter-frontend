@@ -25,7 +25,7 @@ class _DashboardTimelinePanelState extends State<DashboardTimelinePanel> {
       child: FutureBuilder(
           future: MainApiRepo.jobApiRepo.fetchByEnum(
               context.watch<DashboardJobEnumWrapper>().value,
-              "",
+              context.read<SearchTextWrapper>().value,
               context.read<JobFiltersSorts>()),
           builder: (context, snapshot) {
             if (snapshot.hasError) {

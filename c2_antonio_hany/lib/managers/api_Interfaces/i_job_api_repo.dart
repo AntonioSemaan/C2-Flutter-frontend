@@ -8,4 +8,6 @@ abstract class IJobApiRepo {
   Future<Map<String,dynamic>?> fetchByUser(int userId);
 
   Future<Map<String,dynamic>?> create(Job job);
+
+  Future<Map<String,dynamic>?> delete(Job job);
 }

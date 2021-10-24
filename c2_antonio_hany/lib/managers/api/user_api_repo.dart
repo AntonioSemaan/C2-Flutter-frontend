@@ -21,8 +21,11 @@ class UserApiRepo implements IUserApiRepo {
       "title": title,
     };
     Map<String, dynamic>? responseBody =
-        await _apiManager.put("/Jobook/user/", {}, params: params);
-    if (responseBody == null || responseBody["data"] != null) {
+        await _apiManager.put("/Jobook/v1/user/", {}, params: params);
+    if (responseBody == null || responseBody["data"] == null) {
+      if (responseBody!["errorMessage"] != null) {
+        return responseBody;
+      }
       return {"errorMessage": "Something went wrong, please try again."}
           .cast<String, dynamic>();
     } else {
@@ -37,8 +40,11 @@ class UserApiRepo implements IUserApiRepo {
       "password": password,
     };
     Map<String, dynamic>? responseBody =
-        await _apiManager.post("/Jobook/user/", {}, params: params);
+        await _apiManager.post("/Jobook/v1/user/", {}, params: params);
     if (responseBody == null || responseBody["data"] == null) {
+      if (responseBody!["errorMessage"] != null) {
+        return responseBody;
+      }
       return {"errorMessage": "Something went wrong, please try again."}
           .cast<String, dynamic>();
     } else {
@@ -52,18 +58,15 @@ class UserApiRepo implements IUserApiRepo {
       "userId": userId.toString(),
     };
     Map<String, dynamic>? responseBody =
-        await _apiManager.get("/Jobook/user/", params: params);
+        await _apiManager.get("/Jobook/v1/user/", params: params);
     if (responseBody == null || responseBody["data"] == null) {
+      if (responseBody!["errorMessage"] != null) {
+        return responseBody;
+      }
       return {"errorMessage": "Something went wrong, please try again."}
           .cast<String, dynamic>();
     } else {
       return responseBody["data"];
     }
-  }
-
-  @override
-  Future<Map<String, dynamic>?> updateUser(User user) {
-    // TODO: implement updateUser
-    throw UnimplementedError();
   }
 }

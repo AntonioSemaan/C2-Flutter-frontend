@@ -9,5 +9,4 @@ abstract class IUserApiRepo {
 
   Future<Map<String, dynamic>?> fetchUser(int userId);
 
-  Future<Map<String, dynamic>?> updateUser(User user);
 }

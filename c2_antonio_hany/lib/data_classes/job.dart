@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:c2_antonio_hany/data_classes/comment.dart';
 import 'package:c2_antonio_hany/data_classes/user.dart';
 import 'package:c2_antonio_hany/enums.dart';
 import 'package:c2_antonio_hany/globals.dart';
@@ -17,6 +18,7 @@ class Job {
   double? salaryTo;
   DateTime? deadline;
   DateTime? creationDate;
+  List<Comment>? comments;
 
   Job(
       {this.id,
@@ -30,7 +32,8 @@ class Job {
       this.salaryFrom,
       this.salaryTo,
       this.deadline,
-      this.creationDate});
+      this.creationDate,
+      this.comments});
 
   Job.fromJson(Map<String, dynamic> data) {
     id = data["jobId"].runtimeType == String
@@ -59,6 +62,10 @@ class Job {
     if (data["jobCreationDate"] != "") {
       creationDate = gDatabaseStampFormat.parse(data["jobCreationDate"]);
     }
+    if (data["comments"] != null) {
+      comments =
+          (data["comments"] as List).map((e) => Comment.fromJson(e)).toList();
+    }
   }
 
   Map<String, dynamic> toJsonMap() {
@@ -70,7 +77,7 @@ class Job {
       toReturn["jobEnum"] = jobEnum!.value;
     }
     if (user != null) {
-      toReturn["userId"] = user!.toJson();
+      toReturn["userId"] = user!.userId;
     }
     if (jobType != null) {
       toReturn["type"] = jobType!.value;
@@ -94,11 +101,15 @@ class Job {
       toReturn["salaryTo"] = salaryTo;
     }
     if (deadline != null) {
-      toReturn["deadline"] = deadline;
+      toReturn["deadline"] = gDatabaseFormat.format(deadline!);
     }
     if (creationDate != null) {
-      toReturn["creationDate"] = creationDate;
+      toReturn["creationDate"] = gDatabaseFormat.format(creationDate!);
     }
+    if (comments != null) {
+      toReturn["comments"] = comments!.map((e) => e.toJsonMap());
+    }
+
     return toReturn;
   }
 

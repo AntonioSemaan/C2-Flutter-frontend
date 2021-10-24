@@ -45,7 +45,6 @@ class _DashboardPageState extends State<DashboardPage> {
           ),
         ),
       ),
-      hasSearchField: true,
       toolBar: Master.getToolbarForPage(context, ToolBarForPage.DASHBOARD),
       secondToolBarAlignment: MainAxisAlignment.spaceEvenly,
     );

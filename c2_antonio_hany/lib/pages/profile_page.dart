@@ -21,7 +21,6 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Master(
-        hasSearchField: true,
         toolBar: Master.getToolbarForPage(context, ToolBarForPage.PROFILE),
         secondToolBarAlignment: MainAxisAlignment.spaceEvenly,
         content: DefaultSecondToolbar(

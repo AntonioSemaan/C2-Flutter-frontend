@@ -17,7 +17,6 @@ class Master extends StatefulWidget {
   final MainAxisAlignment? toolBarAlignment;
   final MainAxisAlignment? secondToolBarAlignment;
   final String? title;
-  final bool? hasSearchField;
 
   Master(
       {Key? key,
@@ -26,8 +25,7 @@ class Master extends StatefulWidget {
       this.secondToolBar = const <Widget>[],
       this.toolBarAlignment = MainAxisAlignment.end,
       this.secondToolBarAlignment = MainAxisAlignment.center,
-      this.title = "",
-      this.hasSearchField = false})
+      this.title = "",})
       : super(key: key);
 
   @override
@@ -144,7 +142,6 @@ class Master extends StatefulWidget {
 }
 
 class _MasterState extends State<Master> {
-  String? _searchFieldText = "";
 
   @override
   Widget build(BuildContext context) {
@@ -187,43 +184,6 @@ class _MasterState extends State<Master> {
                           Row(
                               mainAxisAlignment: widget.toolBarAlignment!,
                               children: widget.toolBar!),
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: widget.toolBarAlignment!,
-                            children: [
-                              Visibility(
-                                visible: widget.hasSearchField!,
-                                child: Container(
-                                    width: 200,
-                                    height: 40,
-                                    child: widget.hasSearchField!
-                                        ? TextField(
-                                            decoration: InputDecoration(
-                                                hintText: "Search",
-                                                hintStyle: Theme.of(context)
-                                                    .textTheme
-                                                    .subtitle2),
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headline4,
-                                            cursorColor: Colors.white,
-                                            onSubmitted: (value) {
-                                              Navigator.of(context).push(
-                                                  MaterialPageRoute(
-                                                      builder: (context) {
-                                                return SearchResultsPage(
-                                                    searchText:
-                                                        _searchFieldText!);
-                                              }));
-                                            },
-                                            onChanged: (value) {
-                                              _searchFieldText = value;
-                                            },
-                                          )
-                                        : null),
-                              )
-                            ],
-                          ),
                         ],
                       ),
                     ],

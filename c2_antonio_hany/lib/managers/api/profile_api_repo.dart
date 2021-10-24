@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:c2_antonio_hany/data_classes/user.dart';
 import 'package:c2_antonio_hany/data_classes/user_skill.dart';
 import 'package:c2_antonio_hany/data_classes/user_experience.dart';
 import 'package:c2_antonio_hany/data_classes/user_education.dart';
@@ -14,8 +15,11 @@ class ProfileApiRepo implements IProfileApiRepo {
     Map<String, String> params = {"userId": userId.toString()};
 
     Map<String, dynamic>? responseBody =
-        await apiManager.get("Jobook/user/education", params: params);
+        await apiManager.get("Jobook/v1/user/education", params: params);
     if (responseBody == null || responseBody["data"] == null) {
+      if (responseBody!["errorMessage"] != null) {
+        return responseBody;
+      }
       return {"errorMessage": "Something went wrong, please try again."}
           .cast<String, dynamic>();
     } else {
@@ -28,8 +32,11 @@ class ProfileApiRepo implements IProfileApiRepo {
     Map<String, String> params = {"userId": userId.toString()};
 
     Map<String, dynamic>? responseBody =
-        await apiManager.get("Jobook/user/experience", params: params);
+        await apiManager.get("Jobook/v1/user/experience", params: params);
     if (responseBody == null || responseBody["data"] == null) {
+      if (responseBody!["errorMessage"] != null) {
+        return responseBody;
+      }
       return {"errorMessage": "Something went wrong, please try again."}
           .cast<String, dynamic>();
     } else {
@@ -42,8 +49,11 @@ class ProfileApiRepo implements IProfileApiRepo {
     Map<String, String> params = {"userId": userId.toString()};
 
     Map<String, dynamic>? responseBody =
-        await apiManager.get("Jobook/user/skills", params: params);
+        await apiManager.get("Jobook/v1/user/skills", params: params);
     if (responseBody == null || responseBody["data"] == null) {
+      if (responseBody!["errorMessage"] != null) {
+        return responseBody;
+      }
       return {"errorMessage": "Something went wrong, please try again."}
           .cast<String, dynamic>();
     } else {
@@ -62,8 +72,11 @@ class ProfileApiRepo implements IProfileApiRepo {
     Map<String, dynamic> body = {"education": bodyList};
 
     Map<String, dynamic>? responseBody =
-        await apiManager.put("Jobook/user/education", body, params: params);
+        await apiManager.put("Jobook/v1/user/education", body, params: params);
     if (responseBody == null || responseBody["data"] == null) {
+      if (responseBody!["errorMessage"] != null) {
+        return responseBody;
+      }
       return {"errorMessage": "Something went wrong, please try again."}
           .cast<String, dynamic>();
     } else {
@@ -81,8 +94,11 @@ class ProfileApiRepo implements IProfileApiRepo {
     Map<String, dynamic> body = {"experience": bodyList};
 
     Map<String, dynamic>? responseBody =
-        await apiManager.put("Jobook/user/experience", body, params: params);
+        await apiManager.put("Jobook/v1/user/experience", body, params: params);
     if (responseBody == null || responseBody["data"] == null) {
+      if (responseBody!["errorMessage"] != null) {
+        return responseBody;
+      }
       return {"errorMessage": "Something went wrong, please try again."}
           .cast<String, dynamic>();
     } else {
@@ -101,8 +117,35 @@ class ProfileApiRepo implements IProfileApiRepo {
     Map<String, dynamic> body = {"skills": bodyList};
 
     Map<String, dynamic>? responseBody =
-        await apiManager.put("Jobook/user/skills", body, params: params);
+        await apiManager.put("Jobook/v1/user/skills", body, params: params);
     if (responseBody == null || responseBody["data"] == null) {
+      if (responseBody!["errorMessage"] != null) {
+        return responseBody;
+      }
+      return {"errorMessage": "Something went wrong, please try again."}
+          .cast<String, dynamic>();
+    } else {
+      return responseBody["data"];
+    }
+  }
+
+  @override
+  Future<Map<String, dynamic>?> updateUser(User user) async {
+    Map<String, String> params = {"userId": user.userId.toString()};
+
+    Map<String, dynamic> body = {
+      "firstName": user.firstName,
+      "lastName": user.lastName,
+      "email": user.email,
+      "title": user.title
+    };
+
+    Map<String, dynamic>? responseBody =
+        await apiManager.put("Jobook/v1/user/personalInfo", body, params: params);
+    if (responseBody == null || responseBody["data"] == null) {
+      if (responseBody!["errorMessage"] != null) {
+        return responseBody;
+      }
       return {"errorMessage": "Something went wrong, please try again."}
           .cast<String, dynamic>();
     } else {

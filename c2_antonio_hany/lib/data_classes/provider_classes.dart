@@ -64,3 +64,14 @@ class UserIdWrapper {
 
   UserIdWrapper(this.value);
 }
+
+class SearchTextWrapper extends ChangeNotifier {
+  String _value = "";
+
+  String get value => _value;
+
+  set value(newValue) {
+    _value = newValue;
+    notifyListeners();
+  }
+}

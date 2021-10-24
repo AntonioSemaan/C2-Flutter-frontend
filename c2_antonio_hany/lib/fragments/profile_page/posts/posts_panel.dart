@@ -65,18 +65,13 @@ class _PostsPanelState extends State<PostsPanel> {
                         .toList();
                 if (context.read<JobsListWrapper>().value.isNotEmpty) {
                   return ProfilePagePanelWrapper(
-                      child: Column(
-                    children: [
-                      Expanded(
-                        child: ListView.builder(
-                          itemCount:
-                              context.watch<JobsListWrapper>().value.length,
-                          itemBuilder: (context, index) {
-                            return PostFragment(index: index);
-                          },
-                        ),
-                      ),
-                    ],
+                      child: Expanded(
+                    child: ListView.builder(
+                      itemCount: context.watch<JobsListWrapper>().value.length,
+                      itemBuilder: (context, index) {
+                        return PostFragment(index: index);
+                      },
+                    ),
                   ));
                 } else {
                   return const Center(
