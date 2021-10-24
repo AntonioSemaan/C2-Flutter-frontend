@@ -1,7 +1,10 @@
 import 'package:c2_antonio_hany/data_classes/provider_classes.dart';
 import 'package:c2_antonio_hany/enums.dart';
 import 'package:c2_antonio_hany/fragments/profile_page/education/education_fragment.dart';
+import 'package:c2_antonio_hany/fragments/profile_page/education/new_education_fragment.dart';
 import 'package:c2_antonio_hany/fragments/profile_page/experience/experience_fragment.dart';
+import 'package:c2_antonio_hany/fragments/profile_page/experience/new_experience_fragment.dart';
+import 'package:c2_antonio_hany/fragments/profile_page/posts/new_post_fragment.dart';
 import 'package:c2_antonio_hany/fragments/profile_page/posts/post_fragment.dart';
 import 'package:c2_antonio_hany/globals.dart';
 import 'package:flutter/material.dart';
@@ -91,19 +94,19 @@ class _ProfilePageLeftMenuState extends State<ProfilePageLeftMenu> {
     Widget? toShow;
 
     if (context.read<ProfilePageViewWrapper>().value == ProfilePageView.POSTS) {
-      toShow = PostFragment(index: -1);
+      toShow = NewPostFragment();
     } else if (context.read<ProfilePageViewWrapper>().value ==
         ProfilePageView.EDUCATION) {
-          toShow = EducationFragment(index: -1);
+      toShow = NewEducationFragment();
     } else if (context.read<ProfilePageViewWrapper>().value ==
         ProfilePageView.EXPERIENCE) {
-          toShow = ExperienceFragment(index: -1);
+      toShow = NewExperienceFragment();
     } else {
       toShow = Container();
     }
 
     AlertDialog alertDialog = AlertDialog(
-      content: Container(),
+      content: toShow,
     );
 
     showDialog(
