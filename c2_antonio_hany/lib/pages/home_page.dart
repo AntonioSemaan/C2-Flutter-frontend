@@ -27,7 +27,7 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin<HomePage> {
             children: [
               Expanded(
                 child: Image.asset(
-                  "recruitment.png",
+                  "assets/recruitment.png",
                   fit: BoxFit.fill,
                 ),
               ),
@@ -37,45 +37,45 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin<HomePage> {
             height: 400,
             color: Colors.blue[200],
             child: Row(
-          children: [
-            Container(
-              margin: const EdgeInsets.only(left: 270.0),
-              padding: const EdgeInsets.all(8.0),
-              width: 300,
-              child: const Text(
-                "Post your job for many people to see",
-                style: TextStyle(color: Colors.black87, fontSize: 48),
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.only(left: 500),
-              padding: const EdgeInsets.all(8.0),
-              child: TextButton(
-                  style: ButtonStyle(
-                    shape:
-                        MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18.0),
-                    )),
-                    fixedSize:
-                        MaterialStateProperty.all(const Size(200, 100)),
-                    backgroundColor:
-                        MaterialStateProperty.all(Colors.white),
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const SignUpLogInPage(
-                            operationFlag: LoginSignUpFlag.SIGNUP)));
-                  },
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(left: 270.0),
+                  padding: const EdgeInsets.all(8.0),
+                  width: 300,
                   child: const Text(
-                    "Get Started Now",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: Color.fromRGBO(0, 133, 254, 1.0),
-                        fontSize: 28),
-                  )),
-            ),
-          ],
+                    "Post your job for many people to see",
+                    style: TextStyle(color: Colors.black87, fontSize: 48),
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(left: 500),
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextButton(
+                      style: ButtonStyle(
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18.0),
+                        )),
+                        fixedSize:
+                            MaterialStateProperty.all(const Size(200, 100)),
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.white),
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => const SignUpLogInPage(
+                                operationFlag: LoginSignUpFlag.SIGNUP)));
+                      },
+                      child: const Text(
+                        "Get Started Now",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            color: Color.fromRGBO(0, 133, 254, 1.0),
+                            fontSize: 28),
+                      )),
+                ),
+              ],
             ),
           )
         ],
