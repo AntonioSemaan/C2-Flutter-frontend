@@ -21,6 +21,6 @@ class _ChatWelcomeScreenState extends State<ChatWelcomeScreen> {
     return Scaffold(
         appBar: ChatWidget.getAppBar(ChatData.appName),
         backgroundColor: Colors.white,
-        body: ChatWidget.widgetLoginScreen(context));
+        body: ChatWidget.widgetWelcomeScreen(context));
   }
 }
