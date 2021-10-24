@@ -58,7 +58,7 @@ class __DefaultSecondToolbarInternalState
                 color: const Color.fromRGBO(0, 133, 254, 1.0),
               ),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,git 
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   SizedBox(
                     width: 200,

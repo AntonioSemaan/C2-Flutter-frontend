@@ -13,9 +13,9 @@ class ZoomImage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text(
+        title:  Text(
           'FULL PHOTO',
-          style: TextStyle(color: primaryColor, fontWeight: FontWeight.bold),
+          style: TextStyle(color: Colors.blue[900], fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
       ),

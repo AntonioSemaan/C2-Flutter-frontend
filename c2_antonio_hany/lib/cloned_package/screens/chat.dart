@@ -27,14 +27,13 @@ class Chat extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
+    return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        leading: null,
         title: Text(peerName),
-        backgroundColor: themeColor,
+        backgroundColor: const Color.fromRGBO(0, 133, 254, 1.0),
       ),
-      body: new _ChatScreen(
+      body: _ChatScreen(
         currentUserId: currentUserId,
         peerId: peerId,
         peerAvatar: peerAvatar,
@@ -257,8 +256,7 @@ class _ChatScreenState extends State<_ChatScreen> {
       child: isLoading!
           ? Container(
               child: Center(
-                child: CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation<Color>(themeColor)),
+                child: CircularProgressIndicator(),
               ),
               color: Colors.white.withOpacity(0.8),
             )
@@ -270,41 +268,15 @@ class _ChatScreenState extends State<_ChatScreen> {
     return Container(
       child: Row(
         children: <Widget>[
-          // Button send image
-          Material(
-            child: new Container(
-              margin: new EdgeInsets.symmetric(horizontal: 1.0),
-              child: new IconButton(
-                icon: new Icon(Icons.image),
-                onPressed: () => getImage(0),
-                color: primaryColor,
-              ),
-            ),
-            color: Colors.white,
-          ),
-          Visibility(
-            visible: !kIsWeb,
-            child: Material(
-              child: new Container(
-                margin: new EdgeInsets.symmetric(horizontal: 1.0),
-                child: new IconButton(
-                  icon: new Icon(Icons.camera_alt),
-                  onPressed: () => getImage(1),
-                  color: primaryColor,
-                ),
-              ),
-              color: Colors.white,
-            ),
-          ),
           // Edit text
           Flexible(
             child: Container(
               child: TextField(
-                style: TextStyle(color: primaryColor, fontSize: 15.0),
+                style: TextStyle(color: Colors.blue[900], fontSize: 15.0),
                 controller: textEditingController,
                 decoration: InputDecoration.collapsed(
                   hintText: 'Type your message...',
-                  hintStyle: TextStyle(color: greyColor),
+                  hintStyle: TextStyle(color: Colors.grey[400]),
                 ),
                 focusNode: focusNode,
               ),
@@ -313,12 +285,12 @@ class _ChatScreenState extends State<_ChatScreen> {
 
           // Button send message
           Material(
-            child: new Container(
-              margin: new EdgeInsets.symmetric(horizontal: 8.0),
-              child: new IconButton(
-                icon: new Icon(Icons.send),
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: IconButton(
+                icon: const Icon(Icons.send),
                 onPressed: () => onSendMessage(textEditingController.text, 0),
-                color: primaryColor,
+                color: const Color.fromRGBO(0, 133, 254, 1.0),
               ),
             ),
             color: Colors.white,
@@ -327,9 +299,9 @@ class _ChatScreenState extends State<_ChatScreen> {
       ),
       width: double.infinity,
       height: 50.0,
-      decoration: new BoxDecoration(
+      decoration: const BoxDecoration(
           border:
-              new Border(top: new BorderSide(color: greyColor2, width: 0.5)),
+              Border(top: BorderSide(color: Colors.grey, width: 0.5)),
           color: Colors.white),
     );
   }

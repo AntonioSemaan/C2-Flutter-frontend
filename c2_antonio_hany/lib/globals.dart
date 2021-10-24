@@ -19,7 +19,7 @@ Future<bool> gCheckInternetConnection() async {
   }
 }
 
-String gDomain = "f411-185-120-28-52.eu.ngrok.io";
+String gDomain = "c2jobook.herokuapp.com";
 
 User? gLoggedUser;
 

@@ -14,33 +14,33 @@ import 'screens/dashboard_screen.dart';
 import 'screens/login_screen.dart';
 
 class ChatData {
-  static String appName = "Just Chat ";
+  static String appName = "Job Book";
 
-  static Future<Null> openDialog(BuildContext context) async {
+  static Future<bool> openDialog(BuildContext context) async {
     switch (await showDialog(
         context: context,
         builder: (BuildContext context) {
           return SimpleDialog(
-            contentPadding:
-                EdgeInsets.only(left: 0.0, right: 0.0, top: 0.0, bottom: 0.0),
+            contentPadding: const EdgeInsets.only(
+                left: 0.0, right: 0.0, top: 0.0, bottom: 0.0),
             children: <Widget>[
               Container(
-                color: themeColor,
-                margin: EdgeInsets.all(0.0),
-                padding: EdgeInsets.only(bottom: 10.0, top: 10.0),
+                color: const Color.fromRGBO(0, 133, 254, 1.0),
+                margin: const EdgeInsets.all(0.0),
+                padding: const EdgeInsets.only(bottom: 10.0, top: 10.0),
                 height: 100.0,
                 child: Column(
                   children: <Widget>[
                     Container(
-                      child: Icon(
+                      child: const Icon(
                         Icons.exit_to_app,
                         size: 30.0,
                         color: Colors.white,
                       ),
-                      margin: EdgeInsets.only(bottom: 10.0),
+                      margin: const EdgeInsets.only(bottom: 10.0),
                     ),
                     ChatWidget.widgetShowText(
-                        'Are you sure to exit app?', '', ''),
+                        'Are you sure you want to exit to exit app?', '', ''),
                   ],
                 ),
               ),
@@ -51,11 +51,11 @@ class ChatData {
                 child: Row(
                   children: <Widget>[
                     Container(
-                      child: Icon(
+                      child: const Icon(
                         Icons.cancel,
                         color: Colors.white70,
                       ),
-                      margin: EdgeInsets.only(right: 10.0),
+                      margin: const EdgeInsets.only(right: 10.0),
                     ),
                     ChatWidget.widgetShowText('Cancel', '', ''),
                   ],
@@ -68,11 +68,11 @@ class ChatData {
                 child: Row(
                   children: <Widget>[
                     Container(
-                      child: Icon(
+                      child: const Icon(
                         Icons.check_circle,
                         color: Colors.white70,
                       ),
-                      margin: EdgeInsets.only(right: 10.0),
+                      margin: const EdgeInsets.only(right: 10.0),
                     ),
                     ChatWidget.widgetShowText('Yes', '', ''),
                   ],
@@ -82,10 +82,11 @@ class ChatData {
           );
         })) {
       case 0:
-        break;
+        return false;
       case 1:
-        exit(0);
-        break;
+        return true;
+      default:
+        return false;
     }
   }
 

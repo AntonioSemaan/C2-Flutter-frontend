@@ -101,9 +101,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
-  Future<bool> onBackPress() {
-    ChatData.openDialog(context);
-    return Future.value(false);
+  Future<bool> onBackPress() async {
+    bool close = await ChatData.openDialog(context);
+    return Future.value(close);
   }
 
   Widget showAddFriend() {
@@ -259,10 +259,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
         stream: streamFriendList(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return Center(
-              child: CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(themeColor),
-              ),
+            return const Center(
+              child: CircularProgressIndicator(),
             );
           }
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -272,7 +270,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           return ListView(
               children: snapshot.data!.docs.map((DocumentSnapshot document) {
             return (document.get('userId') == currentUserId)
-                ? SizedBox(
+                ?const SizedBox(
                     height: 2,
                   )
                 : ListTile(
@@ -280,10 +278,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       child: document.get('photoUrl') != null
                           ? ChatWidget.widgetShowImages(
                               document.get('photoUrl'), 50)
-                          : Icon(
+                          : const Icon(
                               Icons.account_circle,
                               size: 50.0,
-                              color: colorPrimaryDark,
+                              color: Colors.grey,
                             ),
                       borderRadius: BorderRadius.all(Radius.circular(25.0)),
                       clipBehavior: Clip.hardEdge,

@@ -44,12 +44,12 @@ class ChatWidget {
                 Material(
                   child: document.get('photoUrl') != null
                       ? widgetShowImages(document.get('photoUrl'), 50)
-                      : Icon(
+                      : const Icon(
                           Icons.account_circle,
                           size: 50.0,
-                          color: colorPrimaryDark,
+                          color: Colors.grey,
                         ),
-                  borderRadius: BorderRadius.all(Radius.circular(25.0)),
+                  borderRadius: const BorderRadius.all(Radius.circular(25.0)),
                   clipBehavior: Clip.hardEdge,
                 ),
                 Flexible(
@@ -59,14 +59,14 @@ class ChatWidget {
                         Container(
                           child: Text(
                             'Nickname: ${document.get('nickname')}',
-                            style: TextStyle(color: primaryColor),
+                            style: TextStyle(color: Colors.blue[900]),
                           ),
                           alignment: Alignment.centerLeft,
-                          margin: EdgeInsets.fromLTRB(10.0, 0.0, 0.0, 5.0),
+                          margin: const EdgeInsets.fromLTRB(10.0, 0.0, 0.0, 5.0),
                         ),
                       ],
                     ),
-                    margin: EdgeInsets.only(left: 20.0),
+                    margin: const EdgeInsets.only(left: 20.0),
                   ),
                 ),
                 ConstrainedBox(
@@ -97,8 +97,8 @@ class ChatWidget {
                           )));
             },
             style: ElevatedButton.styleFrom(
-                primary: viewBg,
-                onPrimary: viewBg,
+                primary: Colors.white70,
+                onPrimary: Colors.white70,
                 padding: EdgeInsets.fromLTRB(25.0, 10.0, 25.0, 10.0))),
         margin: EdgeInsets.only(bottom: 10.0, left: 5.0, right: 5.0),
       );
@@ -160,7 +160,7 @@ class ChatWidget {
     return AppBar(
       leading: null,
       title: Text(ChatData.appName),
-      backgroundColor: themeColor,
+      backgroundColor: const Color.fromRGBO(0, 133, 254, 1.0),
     );
   }
 
@@ -169,7 +169,7 @@ class ChatWidget {
       child: Container(
           child: Text(
         ChatData.appName,
-        style: TextStyle(fontSize: 28),
+        style: const TextStyle(fontSize: 28),
       )),
     );
   }
@@ -220,8 +220,8 @@ class ChatWidget {
                       DateFormat('dd MMM kk:mm').format(
                           DateTime.fromMillisecondsSinceEpoch(
                               int.parse(document.get('timestamp')))),
-                      style: TextStyle(
-                          color: greyColor,
+                      style: const TextStyle(
+                          color: Colors.grey,
                           fontSize: 12.0,
                           fontStyle: FontStyle.italic),
                     ),
@@ -244,17 +244,14 @@ class ChatWidget {
 
     return Flexible(
       child: groupChatId == ''
-          ? Center(
-              child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(themeColor)))
+          ? const Center(
+              child: CircularProgressIndicator())
           : StreamBuilder<QuerySnapshot>(
               stream: _streamChatData,
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
-                  return Center(
-                      child: CircularProgressIndicator(
-                          valueColor:
-                              AlwaysStoppedAnimation<Color>(themeColor)));
+                  return const Center(
+                      child: CircularProgressIndicator());
                 } else {
                   listMessage = snapshot.data!.docs;
                   return ListView.builder(
@@ -289,7 +286,7 @@ class ChatWidget {
           }
         },
         text: chatContent,
-        style: TextStyle(color: logUserMsg ? primaryColor : Colors.white),
+        style: TextStyle(color: logUserMsg ? Colors.blue[900] : Colors.white),
         linkStyle: TextStyle(color: Colors.blueGrey),
       ),
       // Text(
@@ -299,7 +296,7 @@ class ChatWidget {
       padding: EdgeInsets.fromLTRB(15.0, 10.0, 15.0, 10.0),
       width: kIsWeb ? 400 : 200.0,
       decoration: BoxDecoration(
-          color: logUserMsg ? greyColor2 : primaryColor,
+          color: logUserMsg ? Colors.grey : Colors.blue[900],
           borderRadius: BorderRadius.circular(8.0)),
       margin: logUserMsg
           ? EdgeInsets.only(
@@ -364,7 +361,7 @@ class ChatWidget {
     return Text(
       '$text',
       style: TextStyle(
-          color: (textColor == '') ? Colors.white70 : textColor,
+          color: (textColor == '') ? Colors.black : textColor,
           fontSize: textSize == '' ? 14.0 : textSize),
     );
   }
