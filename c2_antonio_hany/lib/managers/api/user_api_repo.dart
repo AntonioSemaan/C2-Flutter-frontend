@@ -21,7 +21,7 @@ class UserApiRepo implements IUserApiRepo {
       "title": title,
     };
     Map<String, dynamic>? responseBody =
-        await _apiManager.put("/C2/user/", {}, params: params);
+        await _apiManager.put("/Jobook/user/", {}, params: params);
     if (responseBody == null || responseBody["data"] != null) {
       return {"errorMessage": "Something went wrong, please try again."}
           .cast<String, dynamic>();
@@ -37,7 +37,7 @@ class UserApiRepo implements IUserApiRepo {
       "password": password,
     };
     Map<String, dynamic>? responseBody =
-        await _apiManager.post("/C2/user/", {}, params: params);
+        await _apiManager.post("/Jobook/user/", {}, params: params);
     if (responseBody == null || responseBody["data"] == null) {
       return {"errorMessage": "Something went wrong, please try again."}
           .cast<String, dynamic>();
@@ -52,7 +52,7 @@ class UserApiRepo implements IUserApiRepo {
       "userId": userId.toString(),
     };
     Map<String, dynamic>? responseBody =
-        await _apiManager.get("/C2/user/", params: params);
+        await _apiManager.get("/Jobook/user/", params: params);
     if (responseBody == null || responseBody["data"] == null) {
       return {"errorMessage": "Something went wrong, please try again."}
           .cast<String, dynamic>();

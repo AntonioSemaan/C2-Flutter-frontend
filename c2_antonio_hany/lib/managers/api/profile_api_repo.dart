@@ -14,7 +14,7 @@ class ProfileApiRepo implements IProfileApiRepo {
     Map<String, String> params = {"userId": userId.toString()};
 
     Map<String, dynamic>? responseBody =
-        await apiManager.get("C2/user/education", params: params);
+        await apiManager.get("Jobook/user/education", params: params);
     if (responseBody == null || responseBody["data"] == null) {
       return {"errorMessage": "Something went wrong, please try again."}
           .cast<String, dynamic>();
@@ -28,7 +28,7 @@ class ProfileApiRepo implements IProfileApiRepo {
     Map<String, String> params = {"userId": userId.toString()};
 
     Map<String, dynamic>? responseBody =
-        await apiManager.get("C2/user/experience", params: params);
+        await apiManager.get("Jobook/user/experience", params: params);
     if (responseBody == null || responseBody["data"] == null) {
       return {"errorMessage": "Something went wrong, please try again."}
           .cast<String, dynamic>();
@@ -42,7 +42,7 @@ class ProfileApiRepo implements IProfileApiRepo {
     Map<String, String> params = {"userId": userId.toString()};
 
     Map<String, dynamic>? responseBody =
-        await apiManager.get("C2/user/skills", params: params);
+        await apiManager.get("Jobook/user/skills", params: params);
     if (responseBody == null || responseBody["data"] == null) {
       return {"errorMessage": "Something went wrong, please try again."}
           .cast<String, dynamic>();
@@ -62,7 +62,7 @@ class ProfileApiRepo implements IProfileApiRepo {
     Map<String, dynamic> body = {"education": bodyList};
 
     Map<String, dynamic>? responseBody =
-        await apiManager.put("C2/user/education", body, params: params);
+        await apiManager.put("Jobook/user/education", body, params: params);
     if (responseBody == null || responseBody["data"] == null) {
       return {"errorMessage": "Something went wrong, please try again."}
           .cast<String, dynamic>();
@@ -81,7 +81,7 @@ class ProfileApiRepo implements IProfileApiRepo {
     Map<String, dynamic> body = {"experience": bodyList};
 
     Map<String, dynamic>? responseBody =
-        await apiManager.put("C2/user/experience", body, params: params);
+        await apiManager.put("Jobook/user/experience", body, params: params);
     if (responseBody == null || responseBody["data"] == null) {
       return {"errorMessage": "Something went wrong, please try again."}
           .cast<String, dynamic>();
@@ -98,11 +98,10 @@ class ProfileApiRepo implements IProfileApiRepo {
     List<Map<String, dynamic>> bodyList =
         skills.map((e) => e.toJsonMap()).toList();
 
-
     Map<String, dynamic> body = {"skills": bodyList};
 
     Map<String, dynamic>? responseBody =
-        await apiManager.put("C2/user/skills", body, params: params);
+        await apiManager.put("Jobook/user/skills", body, params: params);
     if (responseBody == null || responseBody["data"] == null) {
       return {"errorMessage": "Something went wrong, please try again."}
           .cast<String, dynamic>();

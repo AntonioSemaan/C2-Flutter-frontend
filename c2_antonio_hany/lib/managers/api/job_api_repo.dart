@@ -10,7 +10,8 @@ class JobApiRepo implements IJobApiRepo {
   @override
   Future<Map<String, dynamic>?> create(Job job) async {
     Map<String, dynamic> body = job.toJsonMap();
-    Map<String, dynamic>? responseBody = await _apiManager.put("C2/job/", body);
+    Map<String, dynamic>? responseBody =
+        await _apiManager.put("Jobook/job/", body);
     if (responseBody == null || responseBody["data"] == null) {
       return {"errorMessage": "Something went wrong, please try again."}
           .cast<String, dynamic>();
@@ -32,7 +33,7 @@ class JobApiRepo implements IJobApiRepo {
     Map<String, dynamic> body = filtersSorts.toJsonMap();
 
     Map<String, dynamic>? responseBody =
-        await _apiManager.post("C2/job/", body, params: params);
+        await _apiManager.post("Jobook/job/", body, params: params);
     if (responseBody == null || responseBody["data"] == null) {
       return {"errorMessage": "Something went wrong, please try again."}
           .cast<String, dynamic>();
@@ -47,7 +48,7 @@ class JobApiRepo implements IJobApiRepo {
       "userId": userId.toString(),
     };
     Map<String, dynamic>? responseBody =
-        await _apiManager.post("C2/job/user", {}, params: params);
+        await _apiManager.post("Jobook/job/user", {}, params: params);
     if (responseBody == null || responseBody["data"] == null) {
       return {"errorMessage": "Something went wrong, please try again."}
           .cast<String, dynamic>();
