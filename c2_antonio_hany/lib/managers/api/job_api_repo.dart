@@ -10,8 +10,7 @@ class JobApiRepo implements IJobApiRepo {
   @override
   Future<Map<String, dynamic>?> create(Job job) async {
     Map<String, dynamic> body = job.toJsonMap();
-    Map<String, dynamic>? responseBody =
-        await _apiManager.put("Jobook/v1/job/", body);
+    Map<String, dynamic>? responseBody = await _apiManager.put("v1/job/", body);
     if (responseBody == null || responseBody["data"] == null) {
       if (responseBody!["errorMessage"] != null) {
         return responseBody;
@@ -29,7 +28,7 @@ class JobApiRepo implements IJobApiRepo {
       "jobId": job.id.toString(),
     };
     Map<String, dynamic>? responseBody =
-        await _apiManager.delete("Jobook/v1/job/", params: params);
+        await _apiManager.delete("v1/job/", params: params);
     if (responseBody == null || responseBody["data"] == null) {
       if (responseBody!["errorMessage"] != null) {
         return responseBody;
@@ -54,7 +53,7 @@ class JobApiRepo implements IJobApiRepo {
     Map<String, dynamic> body = filtersSorts.toJsonMap();
 
     Map<String, dynamic>? responseBody =
-        await _apiManager.post("Jobook/v1/job/", body, params: params);
+        await _apiManager.post("v1/job/", body, params: params);
     if (responseBody == null || responseBody["data"] == null) {
       if (responseBody!["errorMessage"] != null) {
         return responseBody;
@@ -72,7 +71,7 @@ class JobApiRepo implements IJobApiRepo {
       "userId": userId.toString(),
     };
     Map<String, dynamic>? responseBody =
-        await _apiManager.post("Jobook/v1/job/user", {}, params: params);
+        await _apiManager.post("v1/job/user", {}, params: params);
     if (responseBody == null || responseBody["data"] == null) {
       if (responseBody!["errorMessage"] != null) {
         return responseBody;

@@ -15,7 +15,7 @@ class ProfileApiRepo implements IProfileApiRepo {
     Map<String, String> params = {"userId": userId.toString()};
 
     Map<String, dynamic>? responseBody =
-        await apiManager.get("Jobook/v1/user/education", params: params);
+        await apiManager.get("v1/user/education", params: params);
     if (responseBody == null || responseBody["data"] == null) {
       if (responseBody!["errorMessage"] != null) {
         return responseBody;
@@ -32,7 +32,7 @@ class ProfileApiRepo implements IProfileApiRepo {
     Map<String, String> params = {"userId": userId.toString()};
 
     Map<String, dynamic>? responseBody =
-        await apiManager.get("Jobook/v1/user/experience", params: params);
+        await apiManager.get("v1/user/experience", params: params);
     if (responseBody == null || responseBody["data"] == null) {
       if (responseBody!["errorMessage"] != null) {
         return responseBody;
@@ -49,7 +49,7 @@ class ProfileApiRepo implements IProfileApiRepo {
     Map<String, String> params = {"userId": userId.toString()};
 
     Map<String, dynamic>? responseBody =
-        await apiManager.get("Jobook/v1/user/skills", params: params);
+        await apiManager.get("v1/user/skills", params: params);
     if (responseBody == null || responseBody["data"] == null) {
       if (responseBody!["errorMessage"] != null) {
         return responseBody;
@@ -72,7 +72,7 @@ class ProfileApiRepo implements IProfileApiRepo {
     Map<String, dynamic> body = {"education": bodyList};
 
     Map<String, dynamic>? responseBody =
-        await apiManager.put("Jobook/v1/user/education", body, params: params);
+        await apiManager.put("v1/user/education", body, params: params);
     if (responseBody == null || responseBody["data"] == null) {
       if (responseBody!["errorMessage"] != null) {
         return responseBody;
@@ -94,7 +94,7 @@ class ProfileApiRepo implements IProfileApiRepo {
     Map<String, dynamic> body = {"experience": bodyList};
 
     Map<String, dynamic>? responseBody =
-        await apiManager.put("Jobook/v1/user/experience", body, params: params);
+        await apiManager.put("v1/user/experience", body, params: params);
     if (responseBody == null || responseBody["data"] == null) {
       if (responseBody!["errorMessage"] != null) {
         return responseBody;
@@ -117,7 +117,7 @@ class ProfileApiRepo implements IProfileApiRepo {
     Map<String, dynamic> body = {"skills": bodyList};
 
     Map<String, dynamic>? responseBody =
-        await apiManager.put("Jobook/v1/user/skills", body, params: params);
+        await apiManager.put("v1/user/skills", body, params: params);
     if (responseBody == null || responseBody["data"] == null) {
       if (responseBody!["errorMessage"] != null) {
         return responseBody;
@@ -141,7 +141,7 @@ class ProfileApiRepo implements IProfileApiRepo {
     };
 
     Map<String, dynamic>? responseBody =
-        await apiManager.put("Jobook/v1/user/personalInfo", body, params: params);
+        await apiManager.put("v1/user/personalInfo", body, params: params);
     if (responseBody == null || responseBody["data"] == null) {
       if (responseBody!["errorMessage"] != null) {
         return responseBody;

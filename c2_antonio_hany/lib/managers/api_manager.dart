@@ -8,6 +8,8 @@ import 'package:http/http.dart' as http;
 class APIManager {
   static final _httpClient = http.Client();
 
+  String additional = "Jobook/";
+
   /// General GET function with headers as optional argument. Default headers:
 
   /// - Content-Type: application/json
@@ -22,7 +24,8 @@ class APIManager {
       };
 
       try {
-        final uri = Uri.https(gDomain, url, params);
+        final uri = Uri.https(gDomain,
+            gDomain.contains("localhost") ? additional + url : url, params);
         http.Response response = await _httpClient
             .get(uri, headers: headers)
             .timeout(
@@ -52,7 +55,8 @@ class APIManager {
       };
       http.Response response;
       try {
-        final uri = Uri.https(gDomain, url, params);
+        final uri = Uri.https(gDomain,
+            gDomain.contains("localhost") ? additional + url : url, params);
         response = await _httpClient
             .post(uri, headers: headers, body: json.encode(body))
             .timeout(
@@ -82,7 +86,8 @@ class APIManager {
         "Accept": "application/json; charset=utf-8",
       };
       try {
-        final uri = Uri.https(gDomain, url, params);
+        final uri = Uri.https(gDomain,
+            gDomain.contains("localhost") ? additional + url : url, params);
         var request = http.MultipartRequest('POST', uri);
         request.headers.addAll(headers);
         body.forEach((key, value) async {
@@ -118,7 +123,8 @@ class APIManager {
       };
 
       try {
-        final uri = Uri.https(gDomain, url, params);
+        final uri = Uri.https(gDomain,
+            gDomain.contains("localhost") ? additional + url : url, params);
         http.Response response = await _httpClient
             .put(uri, headers: headers, body: json.encode(body))
             .timeout(
@@ -150,7 +156,8 @@ class APIManager {
         "Accept": "application/json; charset=utf-8",
       };
       try {
-        final uri = Uri.https(gDomain, url, params);
+        final uri = Uri.https(gDomain,
+            gDomain.contains("localhost") ? additional + url : url, params);
         http.Response response = await _httpClient
             .delete(uri, headers: headers)
             .timeout(

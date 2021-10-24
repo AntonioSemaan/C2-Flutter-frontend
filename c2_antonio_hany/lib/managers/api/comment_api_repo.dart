@@ -13,7 +13,7 @@ class CommentApiRepo extends ICommentApiRepo {
       "userId": userId.toString(),
     };
     Map<String, dynamic>? responseBody =
-        await _apiManager.put("Jobook/v1/comment/", body, params: params);
+        await _apiManager.put("v1/comment/", body, params: params);
     if (responseBody == null || responseBody["data"] == null) {
       if (responseBody!["errorMessage"] != null) {
         return responseBody;
@@ -31,7 +31,7 @@ class CommentApiRepo extends ICommentApiRepo {
       "commentId": commentId.toString(),
     };
     Map<String, dynamic>? responseBody =
-        await _apiManager.delete("Jobook/v1/comment/", params: params);
+        await _apiManager.delete("v1/comment/", params: params);
     if (responseBody == null || responseBody["data"] == null) {
       if (responseBody!["errorMessage"] != null) {
         return responseBody;

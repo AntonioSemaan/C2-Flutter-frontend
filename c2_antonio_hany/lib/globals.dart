@@ -19,7 +19,9 @@ Future<bool> gCheckInternetConnection() async {
   }
 }
 
-String gDomain = "c2jobook.herokuapp.com";
+String gDomain =
+    "c2jobook.herokuapp.com"; // => => comment to use locally and uncomment below
+// String gDomain = "localhost";  => uncomment to use locally and comment above
 
 User? gLoggedUser;
 
