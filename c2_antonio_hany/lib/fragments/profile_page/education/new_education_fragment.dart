@@ -8,7 +8,9 @@ import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 class NewEducationFragment extends StatefulWidget {
-  NewEducationFragment({Key? key}) : super(key: key);
+  List<UserEducation> educations;
+
+  NewEducationFragment({Key? key, required this.educations}) : super(key: key);
 
   @override
   _NewEducationFragmentState createState() => _NewEducationFragmentState();
@@ -186,10 +188,12 @@ class _NewEducationFragmentState extends State<NewEducationFragment> {
           }
         },
         onSaved: (value) {
-          if (mounted) {
-            setState(() {
-              _dateTo = gNormalFormat.parse(value!);
-            });
+          if (value!.isNotEmpty) {
+            if (mounted) {
+              setState(() {
+                _dateTo = gNormalFormat.parse(value);
+              });
+            }
           }
         },
       ),
@@ -252,11 +256,10 @@ class _NewEducationFragmentState extends State<NewEducationFragment> {
                   domain: _domain,
                   dateFrom: _dateFrom,
                   dateTo: _dateTo);
-              context.read<EducationListWrapper>().value.insert(0, education);
-              Map<String, dynamic>? responseData =
-                  await MainApiRepo.profileApiRepo.updateUserEducation(
-                      gLoggedUser!.userId,
-                      context.read<EducationListWrapper>().value);
+              widget.educations.insert(0, education);
+              Map<String, dynamic>? responseData = await MainApiRepo
+                  .profileApiRepo
+                  .updateUserEducation(gLoggedUser!.userId, widget.educations);
               String stringToShow = "";
               if (responseData == null ||
                   responseData.containsKey("errorMessage")) {

@@ -18,11 +18,28 @@ class _ProfilePageLeftRightWrapperState
   @override
   Widget build(BuildContext context) {
     ProfilePageView pageView = context.watch<ProfilePageViewWrapper>().value;
-    return Row(
-      children: [
-        Expanded(flex: 2, child: ProfilePageLeftMenu(pageView: pageView,)),
-        Expanded(flex: 8, child: ProfilePageRightPanel(pageView: pageView,)),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<EducationListWrapper>(
+          create: (_) => EducationListWrapper(),
+        ),
+        ChangeNotifierProvider<ExperienceListWrapper>(
+            create: (_) => ExperienceListWrapper())
       ],
+      child: Row(
+        children: [
+          Expanded(
+              flex: 2,
+              child: ProfilePageLeftMenu(
+                pageView: pageView,
+              )),
+          Expanded(
+              flex: 8,
+              child: ProfilePageRightPanel(
+                pageView: pageView,
+              )),
+        ],
+      ),
     );
   }
 }

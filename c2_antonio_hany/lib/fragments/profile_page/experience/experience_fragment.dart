@@ -213,10 +213,16 @@ class _ExperienceFragmentState extends State<ExperienceFragment> {
       padding: const EdgeInsets.all(8.0),
       child: TextFormField(
         controller: dateToController
-          ..text = gNormalFormat.format(context
-              .read<ExperienceListWrapper>()
-              .value[widget.index]
-              .dateTo!),
+          ..text = context
+                      .read<ExperienceListWrapper>()
+                      .value[widget.index]
+                      .dateTo !=
+                  null
+              ? gNormalFormat.format(context
+                  .read<ExperienceListWrapper>()
+                  .value[widget.index]
+                  .dateTo!)
+              : "",
         decoration: const InputDecoration(
             label: Text("Date To"),
             border: OutlineInputBorder(),
@@ -235,11 +241,15 @@ class _ExperienceFragmentState extends State<ExperienceFragment> {
           }
         },
         onSaved: (value) {
-          if (mounted) {
-            setState(() {
-              context.read<ExperienceListWrapper>().value[widget.index].dateTo =
-                  gNormalFormat.parse(value!);
-            });
+          if (value!.isNotEmpty) {
+            if (mounted) {
+              setState(() {
+                context
+                    .read<ExperienceListWrapper>()
+                    .value[widget.index]
+                    .dateTo = gNormalFormat.parse(value);
+              });
+            }
           }
         },
       ),

@@ -1,4 +1,6 @@
 import 'package:c2_antonio_hany/data_classes/provider_classes.dart';
+import 'package:c2_antonio_hany/data_classes/user_education.dart';
+import 'package:c2_antonio_hany/data_classes/user_experience.dart';
 import 'package:c2_antonio_hany/enums.dart';
 import 'package:c2_antonio_hany/fragments/profile_page/education/new_education_fragment.dart';
 import 'package:c2_antonio_hany/fragments/profile_page/experience/new_experience_fragment.dart';
@@ -62,25 +64,32 @@ class _ProfilePageLeftMenuState extends State<ProfilePageLeftMenu> {
                                       .read<ProfilePageViewWrapper>()
                                       .value ==
                                   ProfilePageView.EDUCATION) {
+                                List<UserEducation> list =
+                                    context.read<EducationListWrapper>().value;
                                 toShow = AlertDialog(
                                   title: const Center(
                                       child: Text("New Education")),
                                   content: SizedBox(
                                       height: 480,
                                       width: 700,
-                                      child: NewEducationFragment()),
+                                      child: NewEducationFragment(
+                                        educations: list,
+                                      )),
                                 );
                               } else if (context
                                       .read<ProfilePageViewWrapper>()
                                       .value ==
                                   ProfilePageView.EXPERIENCE) {
+                                List<UserExperience> list =
+                                    context.read<ExperienceListWrapper>().value;
                                 toShow = AlertDialog(
                                   title: const Center(
                                       child: Text("New Experience")),
                                   content: SizedBox(
                                       height: 480,
                                       width: 700,
-                                      child: NewExperienceFragment()),
+                                      child: NewExperienceFragment(
+                                          experiences: list)),
                                 );
                               }
                               await showDialog(

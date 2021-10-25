@@ -204,8 +204,14 @@ class _EducationFragmentState extends State<EducationFragment> {
       padding: const EdgeInsets.all(8.0),
       child: TextFormField(
         controller: dateToController
-          ..text = gNormalFormat.format(
-              context.read<EducationListWrapper>().value[widget.index].dateTo!),
+          ..text =
+              context.read<EducationListWrapper>().value[widget.index].dateTo !=
+                      null
+                  ? gNormalFormat.format(context
+                      .read<EducationListWrapper>()
+                      .value[widget.index]
+                      .dateTo!)
+                  : "",
         decoration: const InputDecoration(
             label: Text("Date To"),
             border: OutlineInputBorder(),
@@ -224,11 +230,15 @@ class _EducationFragmentState extends State<EducationFragment> {
           }
         },
         onSaved: (value) {
-          if (mounted) {
-            setState(() {
-              context.read<EducationListWrapper>().value[widget.index].dateTo =
-                  gNormalFormat.parse(value!);
-            });
+          if (value!.isNotEmpty) {
+            if (mounted) {
+              setState(() {
+                context
+                    .read<EducationListWrapper>()
+                    .value[widget.index]
+                    .dateTo = gNormalFormat.parse(value);
+              });
+            }
           }
         },
       ),

@@ -8,7 +8,10 @@ import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 class NewExperienceFragment extends StatefulWidget {
-  NewExperienceFragment({Key? key}) : super(key: key);
+  List<UserExperience> experiences;
+
+  NewExperienceFragment({Key? key, required this.experiences})
+      : super(key: key);
 
   @override
   _NewExperienceFragmentState createState() => _NewExperienceFragmentState();
@@ -187,10 +190,12 @@ class _NewExperienceFragmentState extends State<NewExperienceFragment> {
           }
         },
         onSaved: (value) {
-          if (mounted) {
-            setState(() {
-              _dateTo = gNormalFormat.parse(value!);
-            });
+          if (value!.isNotEmpty) {
+            if (mounted) {
+              setState(() {
+                _dateTo = gNormalFormat.parse(value);
+              });
+            }
           }
         },
       ),
@@ -253,11 +258,10 @@ class _NewExperienceFragmentState extends State<NewExperienceFragment> {
                   description: _description,
                   dateFrom: _dateFrom,
                   dateTo: _dateTo);
-              context.read<ExperienceListWrapper>().value.insert(0, experience);
+              widget.experiences.insert(0, experience);
               Map<String, dynamic>? responseData =
                   await MainApiRepo.profileApiRepo.updateUserExperiences(
-                      gLoggedUser!.userId,
-                      context.read<ExperienceListWrapper>().value);
+                      gLoggedUser!.userId, widget.experiences);
               String stringToShow = "";
               if (responseData == null ||
                   responseData.containsKey("errorMessage")) {
