@@ -50,7 +50,7 @@ class _EducationPanelState extends State<EducationPanel> {
               child: Text(responseData["message"]),
             );
           } else {
-            context.read<EducationListWrapper>().value =
+            context.read<EducationListWrapper>().initValue =
                 (responseData["data"] as List<dynamic>)
                     .map((e) => UserEducation.fromJson(e))
                     .toList();

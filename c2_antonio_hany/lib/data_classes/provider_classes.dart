@@ -31,6 +31,10 @@ class EducationListWrapper extends ChangeNotifier {
 
   List<UserEducation> get value => _userEducations;
 
+  set initValue(List<UserEducation> educations) {
+    _userEducations = educations;
+  }
+
   set value(List<UserEducation> educations) {
     _userEducations = educations;
     notifyListeners();
@@ -42,6 +46,10 @@ class ExperienceListWrapper extends ChangeNotifier {
 
   List<UserExperience> get value => _userExperiences;
 
+  set initValue(List<UserExperience> experiences) {
+    _userExperiences = experiences;
+  }
+
   set value(List<UserExperience> experiences) {
     _userExperiences = experiences;
     notifyListeners();
@@ -52,6 +60,10 @@ class JobsListWrapper extends ChangeNotifier {
   List<Job> _userJobs = [];
 
   List<Job> get value => _userJobs;
+
+  set initValue(List<Job> jobs) {
+    _userJobs = jobs;
+  }
 
   set value(List<Job> jobs) {
     _userJobs = jobs;

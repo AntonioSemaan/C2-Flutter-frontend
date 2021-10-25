@@ -88,26 +88,24 @@ class _SkillsFragmentState extends State<SkillsFragment> {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 border: Border.all(color: Colors.white)),
-            child: Expanded(
-              child: Wrap(
-                children: skills
-                    .map((e) => Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Chip(
-                            label: Text(e!),
-                            onDeleted: inEditMode
-                                ? () {
-                                    if (mounted) {
-                                      setState(() {
-                                        skills.remove(e);
-                                      });
-                                    }
+            child: Wrap(
+              children: skills
+                  .map((e) => Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Chip(
+                          label: Text(e!),
+                          onDeleted: inEditMode
+                              ? () {
+                                  if (mounted) {
+                                    setState(() {
+                                      skills.remove(e);
+                                    });
                                   }
-                                : null,
-                          ),
-                        ))
-                    .toList(),
-              ),
+                                }
+                              : null,
+                        ),
+                      ))
+                  .toList(),
             ),
           ),
         ),

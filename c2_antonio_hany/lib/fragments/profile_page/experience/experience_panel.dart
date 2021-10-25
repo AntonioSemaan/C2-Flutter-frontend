@@ -54,7 +54,7 @@ class _ExperiencePanelState extends State<ExperiencePanel> {
               child: Text(responseData["message"]),
             );
           } else {
-            context.read<ExperienceListWrapper>().value =
+              context.read<ExperienceListWrapper>().initValue =
                 (responseData["data"] as List<dynamic>)
                     .map((e) => UserExperience.fromJson(e))
                     .toList();

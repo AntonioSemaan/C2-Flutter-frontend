@@ -59,19 +59,17 @@ class _PostsPanelState extends State<PostsPanel> {
                   child: Text(responseData["message"]),
                 );
               } else {
-                context.read<JobsListWrapper>().value =
+                context.read<JobsListWrapper>().initValue =
                     (responseData["data"] as List<dynamic>)
                         .map((e) => Job.fromJson(e))
                         .toList();
                 if (context.read<JobsListWrapper>().value.isNotEmpty) {
                   return ProfilePagePanelWrapper(
-                      child: Expanded(
-                    child: ListView.builder(
-                      itemCount: context.watch<JobsListWrapper>().value.length,
-                      itemBuilder: (context, index) {
-                        return PostFragment(index: index);
-                      },
-                    ),
+                      child: ListView.builder(
+                    itemCount: context.watch<JobsListWrapper>().value.length,
+                    itemBuilder: (context, index) {
+                      return PostFragment(index: index);
+                    },
                   ));
                 } else {
                   return const Center(
