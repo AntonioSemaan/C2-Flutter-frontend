@@ -64,29 +64,21 @@ class __DefaultSecondToolbarInternalState
                     width: 200,
                     height: 40,
                     child: TextButton(
-                      style: context.watch<DashboardJobEnumWrapper>().value !=
-                              JobEnum.JOB_OFFER
-                          ? ButtonStyle(
-                              shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18.0),
-                                      side: const BorderSide(
-                                          color: Color.fromRGBO(
-                                              0, 133, 254, 1.0)))),
-                              foregroundColor:
-                                  MaterialStateProperty.all(Colors.white),
-                              backgroundColor: MaterialStateProperty.all(
-                                  const Color.fromRGBO(0, 133, 254, 1.0)),
-                              textStyle: MaterialStateProperty.all(
-                                  Theme.of(context).textTheme.headline4),
-                            )
-                          : OutlinedButton.styleFrom(
-                              primary: Colors.white,
-                              side: const BorderSide(
-                                  color: Colors.white, width: 1),
-                              fixedSize: const Size(100, 40),
-                            ),
+                      style: ButtonStyle(
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(18.0),
+                                    side: const BorderSide(
+                                        color:
+                                            Color.fromRGBO(0, 133, 254, 1.0)))),
+                        foregroundColor:
+                            MaterialStateProperty.all(Colors.white),
+                        backgroundColor: MaterialStateProperty.all(
+                            const Color.fromRGBO(0, 133, 254, 1.0)),
+                        textStyle: MaterialStateProperty.all(
+                            Theme.of(context).textTheme.headline4),
+                      ),
                       onPressed: () {
                         Navigator.of(context)
                             .push(MaterialPageRoute(builder: (context) {
