@@ -4,7 +4,7 @@ import 'package:c2_antonio_hany/fragments/elements/default_second_toolbar.dart';
 import 'package:c2_antonio_hany/fragments/profile_page/menus/profile_page_left_menu.dart';
 import 'package:c2_antonio_hany/fragments/profile_page/wrappers/profile_page_left_right_wrapper.dart';
 import 'package:c2_antonio_hany/fragments/profile_page/menus/profile_page_right_panel.dart';
-import 'package:c2_antonio_hany/master.dart';
+import 'package:c2_antonio_hany/jobook_master.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
@@ -20,8 +20,8 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
-    return Master(
-        toolBar: Master.getToolbarForPage(context, ToolBarForPage.PROFILE),
+    return JobookMaster(
+        toolBar: JobookMaster.getToolbarForPage(context, ToolBarForPage.PROFILE),
         secondToolBarAlignment: MainAxisAlignment.spaceEvenly,
         content: DefaultSecondToolbar(
           child: MultiProvider(

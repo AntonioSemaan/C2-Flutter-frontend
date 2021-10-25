@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
-class Master extends StatefulWidget {
+class JobookMaster extends StatefulWidget {
   final Widget content;
   final List<Widget>? toolBar;
   final List<Widget>? secondToolBar;
@@ -18,7 +18,7 @@ class Master extends StatefulWidget {
   final MainAxisAlignment? secondToolBarAlignment;
   final String? title;
 
-  Master(
+  JobookMaster(
       {Key? key,
       required this.content,
       this.toolBar = const <Widget>[],
@@ -29,7 +29,7 @@ class Master extends StatefulWidget {
       : super(key: key);
 
   @override
-  _MasterState createState() => _MasterState();
+  _JobookMasterState createState() => _JobookMasterState();
 
   static List<Widget> getToolbarForPage(
       BuildContext context, ToolBarForPage flag) {
@@ -106,7 +106,7 @@ class Master extends StatefulWidget {
             : () {
                 Navigator.of(context)
                     .push(MaterialPageRoute(builder: (context) {
-                  return ContactUsPage();
+                  return const ContactUsPage();
                 }));
               },
         child: const Text(
@@ -130,7 +130,7 @@ class Master extends StatefulWidget {
           gLoggedUser = null;
           Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(builder: (context) {
-            return const HomePage(title: 'C2 Home');
+            return const HomePage(title: 'Job Book');
           }), (route) => false);
         },
         child: const Text(
@@ -141,7 +141,7 @@ class Master extends StatefulWidget {
   }
 }
 
-class _MasterState extends State<Master> {
+class _JobookMasterState extends State<JobookMaster> {
 
   @override
   Widget build(BuildContext context) {
@@ -159,7 +159,7 @@ class _MasterState extends State<Master> {
                 onTap: () {
                   Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(builder: (context) {
-                    return const HomePage(title: 'C2 Home');
+                    return const HomePage(title: 'Job Book');
                   }), (route) => false);
                 },
               ),

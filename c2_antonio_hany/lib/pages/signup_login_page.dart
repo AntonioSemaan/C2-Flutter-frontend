@@ -2,7 +2,7 @@ import 'package:c2_antonio_hany/enums.dart';
 import 'package:c2_antonio_hany/fragments/elements/custom_expansion_panel.dart';
 import 'package:c2_antonio_hany/fragments/login_signup/login_form_fragment.dart';
 import 'package:c2_antonio_hany/fragments/login_signup/signup_form_fragment.dart';
-import 'package:c2_antonio_hany/master.dart';
+import 'package:c2_antonio_hany/jobook_master.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -36,7 +36,7 @@ class _SignUpLogInPageState extends State<SignUpLogInPage> {
     double calculatedHeight = screenSize.height * 0.70;
     double calculatedWidth = screenSize.width * 0.50;
 
-    return Master(
+    return JobookMaster(
         content: Container(
       color: Colors.white,
       child: Center(
